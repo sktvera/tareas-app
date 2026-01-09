@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Crear tarea</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input placeholder="Título" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea placeholder="Descripción" [(ngModel)]="description"></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="full" (click)="createTask()">
+    Crear
+  </ion-button>
+</ion-content>
