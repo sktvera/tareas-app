@@ -4,16 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
   <ion-item>
-    <ion-input placeholder="Título" [(ngModel)]="title"></ion-input>
+    <ion-input
+      label="Título"
+      labelPlacement="stacked"
+      [(ngModel)]="title"
+      placeholder="Ej: Comprar mercado">
+    </ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-textarea placeholder="Descripción" [(ngModel)]="description"></ion-textarea>
+    <ion-textarea
+      label="Descripción"
+      labelPlacement="stacked"
+      [(ngModel)]="description"
+      placeholder="Opcional">
+    </ion-textarea>
   </ion-item>
 
   <ion-button expand="full" (click)="createTask()">
-    Crear
+    Crear tarea
   </ion-button>
+
 </ion-content>

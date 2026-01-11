@@ -1,20 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { TaskService } from '../../../service/task.service';
+import { Task } from '../../../models/task.model';
 
 @Component({
   selector: 'app-my-tasks',
   templateUrl: './my-tasks.page.html',
   styleUrls: ['./my-tasks.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule],
 })
-export class MyTasksPage implements OnInit {
+export class MyTasksPage {
+  tasks: Task[] = [];
 
-  constructor() { }
+  constructor(private taskService: TaskService) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.tasks = this.taskService.getMyTasks();
   }
 
+  completeTask(id: number) {
+    this.taskService.completeTask(id);
+    this.tasks = this.taskService.getMyTasks();
+  }
 }
