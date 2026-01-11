@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Task, TaskStatus } from '../models/task.model';
+import { Task, TaskStatus, TaskCategory } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,50 +9,74 @@ export class TaskService {
   private tasks: Task[] = [];
   private idCounter = 1;
 
-  // Crear una nueva tarea
-  create(data: { title: string; description?: string }) {
-    const task: Task = {
+  createTask(
+    title: string,
+    description: string,
+    category: TaskCategory
+  ): void {
+    this.tasks.push({
       id: this.idCounter++,
-      title: data.title,
-      description: data.description,
+      title,
+      description,
+      category,
       status: 'PENDING',
       createdAt: new Date(),
-    };
-
-    this.tasks.push(task);
+    });
   }
 
-  // Todas las tareas activas (pendientes o en progreso)
-  getMyTasks(): Task[] {
-    return this.tasks.filter(
-      task => task.status !== 'COMPLETED'
-    );
+  updateTask(
+    id: number,
+    title: string,
+    description: string,
+    category: TaskCategory
+  ): void {
+    const task = this.tasks.find(t => t.id === id);
+    if (task) {
+      task.title = title;
+      task.description = description;
+      task.category = category;
+    }
   }
 
-  // Tareas completadas
-  getCompleted(): Task[] {
-    return this.tasks.filter(
-      task => task.status === 'COMPLETED'
-    );
+  getTasksByStatus(
+    status: TaskStatus,
+    category?: TaskCategory,
+    search?: string
+  ): Task[] {
+    return this.tasks.filter(task => {
+      const matchesStatus = task.status === status;
+      const matchesCategory = !category || task.category === category;
+      const matchesSearch =
+        !search ||
+        task.title.toLowerCase().includes(search.toLowerCase()) ||
+        task.description.toLowerCase().includes(search.toLowerCase());
+
+      return matchesStatus && matchesCategory && matchesSearch;
+    });
   }
 
-  // Marcar tarea como iniciada
-  startTask(id: number) {
-    this.updateStatus(id, 'IN_PROGRESS');
+  assignTask(id: number): void {
+    this.updateStatus(id, 'ASSIGNED');
   }
 
-  // Marcar tarea como completada
-  completeTask(id: number) {
+  completeTask(id: number): void {
     this.updateStatus(id, 'COMPLETED');
   }
 
-  // Obtener todas (opcional / debug)
-  getAll(): Task[] {
-    return [...this.tasks];
+  returnToPending(id: number): void {
+    this.updateStatus(id, 'PENDING');
   }
 
-  // 🔒 Método privado para actualizar estado
-  private updateStatus(id: number, status: TaskStatus) {
+  /** 🔥 NUEVO: COMPLETED → ASSIGNED */
+  returnToAssigned(id: number): void {
+    this.updateStatus(id, 'ASSIGNED');
+  }
+
+  deleteTask(id: number): void {
+    this.tasks = this.tasks.filter(t => t.id !== id);
+  }
+
+  private updateStatus(id: number, status: TaskStatus): void {
     const task = this.tasks.find(t => t.id === id);
     if (task) {
       task.status = status;

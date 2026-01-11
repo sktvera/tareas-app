@@ -6,24 +6,34 @@
 
 <ion-content class="ion-padding">
 
+  <!-- 🔎 Filtros reutilizables -->
+  <app-task-filters
+    (categoryChange)="onCategoryChange($event)"
+    (searchChange)="onSearchChange($event)">
+  </app-task-filters>
+
   <ion-list *ngIf="tasks.length; else empty">
     <ion-item *ngFor="let task of tasks">
+
       <ion-label>
         <h2>{{ task.title }}</h2>
         <p>{{ task.description }}</p>
+        <ion-badge>{{ task.category }}</ion-badge>
       </ion-label>
 
-      <ion-icon
-        name="checkmark-circle"
-        color="success"
-        slot="end">
-      </ion-icon>
+      <ion-button
+        size="small"
+        color="warning"
+        (click)="returnTask(task.id)">
+        Volver a mis tareas
+      </ion-button>
+
     </ion-item>
   </ion-list>
 
   <ng-template #empty>
     <ion-text color="medium">
-      Aún no has completado tareas
+      No hay tareas completadas
     </ion-text>
   </ng-template>
 

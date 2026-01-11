@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Crear tarea</ion-title>
+    <ion-title>Crear tareas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
+  <!-- Formulario -->
   <ion-item>
     <ion-input
       label="Título"
       labelPlacement="stacked"
-      [(ngModel)]="title"
-      placeholder="Ej: Comprar mercado">
+      [(ngModel)]="title">
     </ion-input>
   </ion-item>
 
@@ -19,13 +19,62 @@
     <ion-textarea
       label="Descripción"
       labelPlacement="stacked"
-      [(ngModel)]="description"
-      placeholder="Opcional">
+      [(ngModel)]="description">
     </ion-textarea>
   </ion-item>
 
-  <ion-button expand="full" (click)="createTask()">
+  <ion-item>
+    <ion-select
+      label="Categoría"
+      labelPlacement="stacked"
+      [(ngModel)]="category">
+      <ion-select-option
+        *ngFor="let cat of categories"
+        [value]="cat">
+        {{ cat }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button
+    expand="full"
+    color="primary"
+    (click)="createTask()">
     Crear tarea
   </ion-button>
+
+  <ion-divider></ion-divider>
+
+  <!-- 🔎 Filtros -->
+  <app-task-filters
+    (categoryChange)="onCategoryChange($event)"
+    (searchChange)="onSearchChange($event)">
+  </app-task-filters>
+
+  <!-- Lista de tareas pendientes -->
+  <ion-list *ngIf="tasks.length; else empty">
+    <ion-item *ngFor="let task of tasks">
+
+      <ion-label>
+        <h2>{{ task.title }}</h2>
+        <p>{{ task.description }}</p>
+        <ion-badge>{{ task.category }}</ion-badge>
+      </ion-label>
+
+      <ion-button
+        size="small"
+        color="success"
+        (click)="assignTask(task.id)">
+        Asignar
+      </ion-button>
+
+    </ion-item>
+  </ion-list>
+
+  <ng-template #empty>
+    <ion-text color="medium">
+      No hay tareas pendientes
+    </ion-text>
+  </ng-template>
 
 </ion-content>

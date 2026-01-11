@@ -6,13 +6,27 @@
 
 <ion-content class="ion-padding">
 
+  <!-- 🔎 Filtros reutilizables -->
+  <app-task-filters
+    (categoryChange)="onCategoryChange($event)"
+    (searchChange)="onSearchChange($event)">
+  </app-task-filters>
+
   <ion-list *ngIf="tasks.length; else empty">
     <ion-item *ngFor="let task of tasks">
+
       <ion-label>
         <h2>{{ task.title }}</h2>
         <p>{{ task.description }}</p>
-        <ion-badge color="warning">{{ task.status }}</ion-badge>
+        <ion-badge>{{ task.category }}</ion-badge>
       </ion-label>
+
+      <ion-button
+        size="small"
+        color="primary"
+        (click)="openEdit(task)">
+        Editar
+      </ion-button>
 
       <ion-button
         size="small"
@@ -20,12 +34,27 @@
         (click)="completeTask(task.id)">
         Completar
       </ion-button>
+
+      <ion-button
+        size="small"
+        color="warning"
+        (click)="discardTask(task.id)">
+        Descartar
+      </ion-button>
+
+      <ion-button
+        size="small"
+        color="danger"
+        (click)="deleteTask(task.id)">
+        Eliminar
+      </ion-button>
+
     </ion-item>
   </ion-list>
 
   <ng-template #empty>
     <ion-text color="medium">
-      No tienes tareas activas
+      No tienes tareas asignadas
     </ion-text>
   </ng-template>
 

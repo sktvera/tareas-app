@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar tarea</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item>
+    <ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-textarea
+      label="Descripción"
+      labelPlacement="stacked"
+      [(ngModel)]="description">
+    </ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-select
+      label="Categoría"
+      labelPlacement="stacked"
+      [(ngModel)]="category">
+
+      <ion-select-option
+        *ngFor="let cat of categories"
+        [value]="cat">
+        {{ cat }}
+      </ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="save()">Guardar cambios</ion-button>
+
+</ion-content>
