@@ -19,7 +19,11 @@ import {
   arrowUpOutline,
   arrowDownOutline,
   clipboardOutline,
-  checkmarkCircleOutline
+  checkmarkCircleOutline,
+  createOutline,
+  trashOutline,
+  arrowBackCircleOutline,
+  chevronForwardOutline
 } from 'ionicons/icons';
 
 import { routes } from './app/app.routes';
@@ -35,6 +39,11 @@ addIcons({
   'arrow-down-outline': arrowDownOutline,
   'clipboard-outline': clipboardOutline,
   'checkmark-circle-outline': checkmarkCircleOutline,
+
+  'create-outline': createOutline,
+  'trash-outline': trashOutline,
+  'arrow-back-circle-outline': arrowBackCircleOutline,
+  'chevron-forward-outline': chevronForwardOutline,
 });
 
 bootstrapApplication(AppComponent, {

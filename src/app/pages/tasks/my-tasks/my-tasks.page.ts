@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../../../service/task.service';
 import { Task, TaskCategory } from '../../../models/task.model';
 
-import { TaskFiltersComponent } from '../../../component/task-filters/task-filters.component';
 import { EditTaskModalComponent } from '../../../component/edit-task-modal/edit-task-modal.component';
+import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
 
 @Component({
   selector: 'app-my-tasks',
@@ -16,7 +17,8 @@ import { EditTaskModalComponent } from '../../../component/edit-task-modal/edit-
   imports: [
     IonicModule,
     CommonModule,
-    TaskFiltersComponent,
+    FormsModule,          // ✅ NECESARIO PARA ngModel
+    AppHeaderComponent
   ],
 })
 export class MyTasksPage {
@@ -43,13 +45,8 @@ export class MyTasksPage {
     );
   }
 
-  onCategoryChange(category?: TaskCategory): void {
-    this.selectedCategory = category;
-    this.loadTasks();
-  }
-
-  onSearchChange(search: string): void {
-    this.searchText = search;
+  onSearchChange(value: string): void {
+    this.searchText = value;
     this.loadTasks();
   }
 
@@ -69,14 +66,12 @@ export class MyTasksPage {
   }
 
   openEdit(task: Task): void {
-    this.modalController
-      .create({
-        component: EditTaskModalComponent,
-        componentProps: { task },
-      })
-      .then(modal => {
-        modal.onDidDismiss().then(() => this.loadTasks());
-        modal.present();
-      });
+    this.modalController.create({
+      component: EditTaskModalComponent,
+      componentProps: { task },
+    }).then(modal => {
+      modal.onDidDismiss().then(() => this.loadTasks());
+      modal.present();
+    });
   }
 }

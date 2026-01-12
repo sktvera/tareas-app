@@ -1,61 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Mis tareas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<pp-app-header></pp-app-header>
 
 <ion-content class="ion-padding">
 
-  <!-- 🔎 Filtros reutilizables -->
-  <app-task-filters
-    (categoryChange)="onCategoryChange($event)"
-    (searchChange)="onSearchChange($event)">
-  </app-task-filters>
+  <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-  <ion-list *ngIf="tasks.length; else empty">
-    <ion-item *ngFor="let task of tasks">
+    <ion-item-sliding
+      *ngFor="let task of tasks"
+      class="task-sliding"
+      (ionItemSlidingDidOpen)="task.swiped = true"
+      (ionItemSlidingDidClose)="task.swiped = false">
 
-      <ion-label>
-        <h2>{{ task.title }}</h2>
-        <p>{{ task.description }}</p>
-        <ion-badge>{{ task.category }}</ion-badge>
-      </ion-label>
+      <!-- ===== SWIPE IZQUIERDA → DESCARTAR ===== -->
+      <ion-item-options side="start">
+        <ion-item-option
+          color="warning"
+          expandable
+          (click)="discardTask(task.id)">
+          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+          Descartar
+        </ion-item-option>
+      </ion-item-options>
 
-      <ion-button
-        size="small"
-        color="primary"
-        (click)="openEdit(task)">
-        Editar
-      </ion-button>
+      <!-- ===== ITEM ===== -->
+      <ion-item lines="none" class="task-item">
 
-      <ion-button
-        size="small"
-        color="success"
-        (click)="completeTask(task.id)">
-        Completar
-      </ion-button>
+        <div class="label-content">
 
-      <ion-button
-        size="small"
-        color="warning"
-        (click)="discardTask(task.id)">
-        Descartar
-      </ion-button>
+          <!-- TEXTO -->
+          <ion-label>
+            <h2>{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+            <ion-badge color="medium">
+              {{ task.category }}
+            </ion-badge>
+            
+            
+          </ion-label>
 
-      <ion-button
-        size="small"
-        color="danger"
-        (click)="deleteTask(task.id)">
-        Eliminar
-      </ion-button>
+          <!-- ACCIONES INLINE -->
+          <div class="inline-actions">
 
-    </ion-item>
+<ion-button
+  fill="clear"
+  size="small"
+  (click)="openEdit(task)">
+  <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+</ion-button>
+            <ion-button
+              fill="clear"
+              size="small"
+              color="danger"
+              (click)="deleteTask(task.id)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+
+          </div>
+
+        </div>
+
+      </ion-item>
+
+      <!-- ===== SWIPE DERECHA → COMPLETAR ===== -->
+      <ion-item-options side="end">
+        <ion-item-option
+          color="success"
+          expandable
+          (click)="completeTask(task.id)">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          Completar
+        </ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
   </ion-list>
 
+  <!-- ===== EMPTY ===== -->
   <ng-template #empty>
-    <ion-text color="medium">
-      No tienes tareas asignadas
-    </ion-text>
+    <div class="empty-state">
+      <ion-icon name="clipboard-outline"></ion-icon>
+      <p>No tienes tareas asignadas</p>
+    </div>
   </ng-template>
 
 </ion-content>
