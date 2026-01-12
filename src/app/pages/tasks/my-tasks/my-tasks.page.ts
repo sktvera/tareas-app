@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../../../service/task.service';
+import { CategoryService } from '../../../service/category.service';
 import { Task, TaskCategory } from '../../../models/task.model';
 
 import { EditTaskModalComponent } from '../../../component/edit-task-modal/edit-task-modal.component';
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
+import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
+import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 
 @Component({
   selector: 'app-my-tasks',
@@ -17,38 +20,100 @@ import { AppHeaderComponent } from '../../../component/app-header/app-header.com
   imports: [
     IonicModule,
     CommonModule,
-    FormsModule,          // ✅ NECESARIO PARA ngModel
-    AppHeaderComponent
+    FormsModule,
+    AppHeaderComponent,
+    TaskToolbarComponent,
   ],
 })
-export class MyTasksPage {
+export class MyTasksPage implements OnInit {
 
   tasks: Task[] = [];
+  categories: TaskCategory[] = [];
 
-  selectedCategory?: TaskCategory;
   searchText = '';
+  sortDirection: 'ASC' | 'DESC' = 'ASC';
+
+  // ✅ filtros activos
+  activeCategoryFilters: TaskCategory[] = [];
 
   constructor(
     private taskService: TaskService,
-    private modalController: ModalController
+    private categoryService: CategoryService,
+    private modalCtrl: ModalController
   ) {}
+
+  ngOnInit(): void {
+    this.categories = this.categoryService.getCategories();
+  }
 
   ionViewWillEnter(): void {
     this.loadTasks();
   }
 
+  /* ===== CARGA DE TAREAS ===== */
+
   loadTasks(): void {
-    this.tasks = this.taskService.getTasksByStatus(
+    let result = this.taskService.getTasksByStatus(
       'ASSIGNED',
-      this.selectedCategory,
+      undefined,
       this.searchText
     );
+
+    // ✅ FILTRO POR CATEGORÍA (MULTI)
+    if (this.activeCategoryFilters.length) {
+      result = result.filter(task =>
+        this.activeCategoryFilters.includes(task.category)
+      );
+    }
+
+    // ✅ ORDENAMIENTO
+    result = result.sort((a, b) =>
+      this.sortDirection === 'ASC'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title)
+    );
+
+    this.tasks = result;
   }
+
+  /* ===== BUSCADOR ===== */
 
   onSearchChange(value: string): void {
     this.searchText = value;
     this.loadTasks();
   }
+
+  /* ===== ORDEN ===== */
+
+  onSortChange(direction: 'ASC' | 'DESC'): void {
+    this.sortDirection = direction;
+    this.loadTasks();
+  }
+
+  /* ===== FILTRO POR CATEGORÍA ===== */
+
+  async openCategoryModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: CategoryFilterModalComponent,
+      componentProps: {
+        categories: this.categories,
+        selected: [...this.activeCategoryFilters],
+      },
+      initialBreakpoint: 0.4,
+      breakpoints: [0, 0.4, 0.7],
+    });
+
+    modal.onDidDismiss().then(({ data }) => {
+      if (Array.isArray(data)) {
+        this.activeCategoryFilters = data;
+        this.loadTasks();
+      }
+    });
+
+    await modal.present();
+  }
+
+  /* ===== ACCIONES ===== */
 
   completeTask(id: number): void {
     this.taskService.completeTask(id);
@@ -66,12 +131,14 @@ export class MyTasksPage {
   }
 
   openEdit(task: Task): void {
-    this.modalController.create({
-      component: EditTaskModalComponent,
-      componentProps: { task },
-    }).then(modal => {
-      modal.onDidDismiss().then(() => this.loadTasks());
-      modal.present();
-    });
+    this.modalCtrl
+      .create({
+        component: EditTaskModalComponent,
+        componentProps: { task },
+      })
+      .then(modal => {
+        modal.onDidDismiss().then(() => this.loadTasks());
+        modal.present();
+      });
   }
 }

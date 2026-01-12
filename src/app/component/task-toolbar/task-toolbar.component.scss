@@ -1,0 +1,37 @@
+.apple-header {
+  --background: rgba(255, 255, 255, 0.95);
+  --backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+}
+
+.search-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-wrapper ion-searchbar {
+  padding: 0;
+  --background: #f5f5f7;
+  --border-radius: 14px;
+  --box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+ion-button ion-icon {
+  font-size: 22px;
+  color: #6d28d9;
+}
+
+.filter-badge {
+  position: absolute;
+  top: 4px;
+  right: 2px;
+  font-size: 10px;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 10px;
+  background: #6d28d9;
+  color: white;
+}

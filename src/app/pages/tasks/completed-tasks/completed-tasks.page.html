@@ -1,10 +1,17 @@
 <pp-app-header></pp-app-header>
 
+<app-task-toolbar
+  [activeFiltersCount]="activeCategory ? 1 : 0"
+  (searchChange)="onSearchChange($event)"
+  (filterClick)="openCategoryModal()"
+  (sortChange)="onSortChange($event)">
+</app-task-toolbar>
+
 <ion-content class="ion-padding">
 
   <!-- ===== FILTROS ===== -->
   <app-task-filters
-    (categoryChange)="onCategoryChange($event)"
+
     (searchChange)="onSearchChange($event)">
   </app-task-filters>
 

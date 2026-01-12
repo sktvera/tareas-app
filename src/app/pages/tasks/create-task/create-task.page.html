@@ -1,76 +1,37 @@
 <!-- ===== HEADER ===== -->
 <ion-header translucent>
 
-  <!-- BRAND -->
-  <pp-app-header></pp-app-header>
-
-  <!-- ACTION BAR -->
-  <ion-toolbar class="apple-header action-toolbar">
-
-    <!-- CREAR -->
-    <ion-buttons slot="start">
-      <ion-button fill="clear" (click)="toggleCreateForm()">
-        <ion-icon
-          [name]="showCreateForm ? 'close-outline' : 'add-circle-outline'">
-        </ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-    <!-- SEARCH (FULL WIDTH FLEX) -->
-    <div class="search-wrapper">
-      <ion-searchbar
-        [(ngModel)]="searchText"
-        (ionInput)="onSearchChange(searchText)"
-        placeholder="Buscar tareas"
-        debounce="250"
-        animated
-        show-clear-button="focus">
-      </ion-searchbar>
-    </div>
-
-    <!-- ACTIONS -->
-    <ion-buttons slot="end">
-
-      <!-- FILTRO -->
-      <ion-button fill="clear" (click)="openCategoryModal()">
-        <ion-icon
-          name="funnel-outline"
-          [class.active-icon]="activeCategoryFilters.length">
-        </ion-icon>
-
-        <ion-badge
-          *ngIf="activeCategoryFilters.length"
-          class="filter-badge">
-          {{ activeCategoryFilters.length }}
-        </ion-badge>
-      </ion-button>
-
-      <!-- ORDEN -->
-      <ion-button fill="clear" (click)="toggleSorting()">
-        <ion-icon
-          [name]="sortDirection === 'ASC'
-            ? 'arrow-up-outline'
-            : 'arrow-down-outline'"
-          class="sort-icon">
-        </ion-icon>
-      </ion-button>
-
-    </ion-buttons>
-
+  <ion-toolbar>
+    <pp-app-header></pp-app-header>
   </ion-toolbar>
+
+  <ion-toolbar>
+    <app-task-toolbar
+      [showCreate]="true"
+      [activeFiltersCount]="activeCategoryFilters.length"
+      (create)="toggleCreateForm()"
+      (searchChange)="onSearchChange($event)"
+      (filterClick)="openCategoryModal()"
+      (sortChange)="onSortChange($event)">
+    </app-task-toolbar>
+  </ion-toolbar>
+
 </ion-header>
 
 <!-- ===== CONTENT ===== -->
-<ion-content class="ion-padding">
+<ion-content fullscreen class="ion-padding">
 
   <!-- FORM CREAR -->
-  <div class="create-form-container" [class.visible]="showCreateForm">
+  <ion-card
+    *ngIf="showCreateForm"
+    class="create-form-card">
+
     <app-task-form
-      *ngIf="showCreateForm"
       [categories]="categories"
       (create)="createTask($event); showCreateForm = false">
     </app-task-form>
-  </div>
+
+  </ion-card>
 
   <ion-divider class="section-divider"></ion-divider>
 
@@ -93,7 +54,6 @@
           </ion-badge>
         </ion-label>
 
-        <!-- Hint swipe -->
         <ion-icon
           *ngIf="!task.swiped"
           name="chevron-forward-outline"

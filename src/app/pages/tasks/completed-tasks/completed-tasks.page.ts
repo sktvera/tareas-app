@@ -8,6 +8,9 @@ import { Task, TaskCategory } from '../../../models/task.model';
 
 import { TaskFiltersComponent } from '../../../component/task-filters/task-filters.component';
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
+import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
+import { ModalController } from '@ionic/angular';
+import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 
 @Component({
   selector: 'app-completed-tasks',
@@ -19,38 +22,61 @@ import { AppHeaderComponent } from '../../../component/app-header/app-header.com
     CommonModule,
     TaskFiltersComponent,
     AppHeaderComponent,
-    FormsModule
+    FormsModule,
+    TaskToolbarComponent,
   ],
 })
 export class CompletedTasksPage {
 
   tasks: Task[] = [];
 
-  selectedCategory?: TaskCategory;
+  activeCategory?: TaskCategory;
   searchText = '';
+  sortDirection: 'ASC' | 'DESC' = 'ASC';
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private modalCtrl: ModalController
+  ) {}
 
   ionViewWillEnter(): void {
     this.loadTasks();
   }
 
   loadTasks(): void {
-    this.tasks = this.taskService.getTasksByStatus(
-      'COMPLETED',
-      this.selectedCategory,
-      this.searchText
-    );
+    this.tasks = this.taskService
+      .getTasksByStatus('COMPLETED', this.activeCategory, this.searchText)
+      .sort((a, b) =>
+        this.sortDirection === 'ASC'
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title)
+      );
   }
 
-  onCategoryChange(category?: TaskCategory): void {
-    this.selectedCategory = category;
+  onSearchChange(value: string): void {
+    this.searchText = value;
     this.loadTasks();
   }
 
-  onSearchChange(search: string): void {
-    this.searchText = search;
+  onSortChange(direction: 'ASC' | 'DESC'): void {
+    this.sortDirection = direction;
     this.loadTasks();
+  }
+
+  async openCategoryModal(): Promise<void> {
+    const modal = await this.modalCtrl.create({
+      component: CategoryFilterModalComponent,
+      componentProps: { selected: this.activeCategory }
+    });
+
+    modal.onDidDismiss().then(({ data }) => {
+      if (data !== undefined) {
+        this.activeCategory = data;
+        this.loadTasks();
+      }
+    });
+
+    await modal.present();
   }
 
   returnTask(id: number): void {

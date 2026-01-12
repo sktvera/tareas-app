@@ -10,8 +10,9 @@ import { Task, TaskCategory } from '../../../models/task.model';
 import { TaskFormComponent } from '../../../component/create-task-form/create-task-form.component';
 import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
+import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
 
-type SortDirection = 'ASC' | 'DESC';
+
 
 @Component({
   selector: 'app-create-task',
@@ -23,7 +24,8 @@ type SortDirection = 'ASC' | 'DESC';
     CommonModule,
     FormsModule,
     TaskFormComponent,
-    AppHeaderComponent
+    AppHeaderComponent,
+    TaskToolbarComponent
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -40,7 +42,11 @@ export class CreateTaskPage implements OnInit {
   activeCategoryFilters: TaskCategory[] = [];
 
   // 🔥 ORDENAMIENTO
-  sortDirection: SortDirection = 'ASC';
+
+
+  sortDirection: 'ASC' | 'DESC' = 'ASC';
+
+activeCategory?: TaskCategory;
 
   constructor(
     private taskService: TaskService,
@@ -156,4 +162,9 @@ assignTask(id: number, sliding?: IonItemSliding): void {
     this.sortDirection = this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
     this.loadTasks();
   }
+
+  onSortChange(direction: 'ASC' | 'DESC'): void {
+  this.sortDirection = direction;
+  this.loadTasks();
+}
 }
