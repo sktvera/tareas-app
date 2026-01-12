@@ -32,7 +32,9 @@ import {
   sparklesOutline, // Para la guía del formulario
   folderOutline, // Para el modal de categorías
   folderOpenOutline,
-  chevronDownOutline // Para el select
+  chevronDownOutline, // Para el select,
+  alertCircleOutline,
+  informationCircleOutline
 } from 'ionicons/icons';
 
 import { routes } from './app/app.routes';
@@ -60,7 +62,11 @@ addIcons({
   'sparkles-outline': sparklesOutline,
   'folder-outline': folderOutline,
   'folder-open-outline': folderOpenOutline,
-  'chevron-down-outline': chevronDownOutline
+  'chevron-down-outline': chevronDownOutline,
+
+
+  'alert-circle-outline': alertCircleOutline,
+  'information-circle-outline': informationCircleOutline
 });
 bootstrapApplication(AppComponent, {
   providers: [

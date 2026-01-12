@@ -140,3 +140,36 @@ ion-searchbar {
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+
+/* --- COPIAR EN global.scss --- */
+
+/* Base del Toast */
+.custom-toast {
+  --border-radius: 16px;
+  --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  
+  &::part(container) {
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Variación Éxito (Morado) */
+.toast-success {
+  --background: #6a11cb;
+  --color: #ffffff;
+  --button-color: #ffffff;
+}
+
+/* Variación Error (Rojo) */
+.toast-error {
+  --background: #eb445a;
+  --color: #ffffff;
+}
+
+/* Variación Info (Azul) */
+.toast-info {
+  --background: #3498db;
+  --color: #ffffff;
+}
