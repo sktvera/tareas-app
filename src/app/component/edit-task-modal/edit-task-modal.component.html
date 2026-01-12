@@ -1,41 +1,57 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Editar tarea</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="close()">Cerrar</ion-button>
+      <ion-button class="close-btn" (click)="close()" mode="ios">
+        Cerrar
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <ion-item>
-    <ion-input label="Nombre" labelPlacement="stacked" [(ngModel)]="title"></ion-input>
-  </ion-item>
-
-  <ion-item>
+  <div class="input-group">
+    
+    <ion-input
+      label="Título de la tarea"
+      labelPlacement="stacked"
+      fill="outline"
+      [(ngModel)]="title"
+      class="custom-input"
+      placeholder="Escribe el nombre...">
+    </ion-input>
+<br>
     <ion-textarea
       label="Descripción"
       labelPlacement="stacked"
-      [(ngModel)]="description">
+      fill="outline"
+      [autoGrow]="true"
+      [(ngModel)]="description"
+      class="custom-input"
+      placeholder="Detalles adicionales (opcional)">
     </ion-textarea>
-  </ion-item>
-
-  <ion-item>
+<br>
     <ion-select
       label="Categoría"
       labelPlacement="stacked"
-      [(ngModel)]="category">
-
-      <ion-select-option
-        *ngFor="let cat of categories"
-        [value]="cat">
+      fill="outline"
+      interface="popover"
+      toggleIcon="chevron-down-outline"
+      [(ngModel)]="category"
+      class="custom-input">
+      <ion-select-option *ngFor="let cat of categories" [value]="cat">
         {{ cat }}
       </ion-select-option>
-
     </ion-select>
-  </ion-item>
 
-  <ion-button expand="full" (click)="save()">Guardar cambios</ion-button>
-
+  </div>
+<br>
+  <ion-button 
+    expand="block" 
+    class="save-button" 
+    (click)="save()"
+    mode="ios">
+    Guardar cambios
+    <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+  </ion-button>
 </ion-content>

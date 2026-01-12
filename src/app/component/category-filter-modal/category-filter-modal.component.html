@@ -1,39 +1,48 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-title>Filtrar por categoría</ion-title>
-
     <ion-buttons slot="end">
-      <ion-button fill="clear" (click)="clear()">Limpiar</ion-button>
+      <ion-button class="clear-btn" (click)="clear()">Limpiar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="list-container">
+    <ion-list lines="none">
+      <ion-item
+        button
+        detail="false"
+        *ngFor="let category of categories"
+        (click)="toggle(category)"
+        [class.selected]="isSelected(category)"
+        class="category-item">
+        
+        <ion-icon 
+          [name]="isSelected(category) ? 'folder-open' : 'folder-outline'" 
+          slot="start" 
+          class="category-icon">
+        </ion-icon>
 
-  <ion-list>
-    <ion-item
-      button
-      *ngFor="let category of categories"
-      (click)="toggle(category)"
-      [class.selected]="isSelected(category)">
+        <ion-label>
+          {{ category }}
+        </ion-label>
 
-      <ion-label>{{ category }}</ion-label>
-
-      <ion-icon
-        *ngIf="isSelected(category)"
-        name="checkmark-circle"
-        color="primary"
-        slot="end">
-      </ion-icon>
-
-    </ion-item>
-  </ion-list>
+        <ion-icon
+          *ngIf="isSelected(category)"
+          name="checkmark-circle"
+          slot="end"
+          class="check-icon animated-pop">
+        </ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
 
   <ion-button
     expand="block"
     class="apply-button"
-    (click)="apply()">
+    (click)="apply()"
+    mode="ios">
     Aplicar filtros
   </ion-button>
-
 </ion-content>

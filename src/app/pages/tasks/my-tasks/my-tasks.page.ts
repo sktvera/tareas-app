@@ -15,7 +15,7 @@ import { CategoryFilterModalComponent } from '../../../component/category-filter
 @Component({
   selector: 'app-my-tasks',
   templateUrl: './my-tasks.page.html',
-  styleUrls: ['./my-tasks.page.scss'],
+  styleUrls: ['./my-tasks.page.scss','../../../shared/scss/tasks.shared.scss'],
   standalone: true,
   imports: [
     IonicModule,
@@ -99,8 +99,9 @@ export class MyTasksPage implements OnInit {
         categories: this.categories,
         selected: [...this.activeCategoryFilters],
       },
-      initialBreakpoint: 0.4,
-      breakpoints: [0, 0.4, 0.7],
+     initialBreakpoint: 0.6, // Ahora se abrirá ocupando el 60% de la pantalla
+    breakpoints: [0, 0.6, 0.9], // Permite bajarla, dejarla al 60% o subirla casi al máximo
+    handle: true, // Muestra la barrita para que el usuario sepa que puede arrastrarla
     });
 
     modal.onDidDismiss().then(({ data }) => {
@@ -135,6 +136,9 @@ export class MyTasksPage implements OnInit {
       .create({
         component: EditTaskModalComponent,
         componentProps: { task },
+        initialBreakpoint: 0.4, // Se abre ocupando el 70%
+    breakpoints: [0, 0.7, 0.95],
+    handle: true
       })
       .then(modal => {
         modal.onDidDismiss().then(() => this.loadTasks());

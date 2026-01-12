@@ -1,68 +1,36 @@
+/* Asegura que el contenido de las páginas no quede oculto detrás de la barra flotante */
+ion-router-outlet {
+  padding-bottom: 100px; /* Suficiente espacio para que la barra no tape el último item */
+}
+
 .apple-tab-bar {
-  --background: rgba(255, 255, 255, 0.94);
-  --border: none;
-
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-
-  height: 70px;
-  padding: 10px 6px;
-
-  border-radius: 24px;
-
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-
-  box-shadow:
-    0 12px 28px rgba(0, 0, 0, 0.08);
+  /* ... tus estilos anteriores ... */
+  
+  // Asegúrate de que la barra siempre esté por encima del contenido
+  z-index: 10; 
+  // Evita que los botones se salgan del contenedor al expandirse
+  contain: none; 
 }
 
-/* Botones */
-.apple-tab-bar ion-tab-button {
-  --color: #1c1c1e;
+/* Efecto de mostrar texto solo al seleccionar */
+ion-tab-button {
+  --color: #8e8e93;
   --color-selected: #6d28d9;
-
-  border-radius: 18px;
-  transition: all 0.25s ease;
-}
-
-/* Íconos */
-.apple-tab-bar ion-icon {
-  font-size: 22px;
-  stroke-width: 32px; /* look tipo SF Symbols */
-  color: currentColor;
-}
-
-/* Texto */
-.apple-tab-bar ion-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-}
-
-/* Activo */
-.apple-tab-bar ion-tab-button.tab-selected {
-  background: rgba(109, 40, 217, 0.14);
-}
-
-/* Feedback táctil */
-.apple-tab-bar ion-tab-button:active {
-  transform: scale(0.95);
-}
-
-@media (max-width: 360px) {
-  .apple-tab-bar ion-label {
-    display: none;
+  
+  // Ocultamos el label por defecto
+  ion-label {
+    display: none; 
+    transition: all 0.3s ease;
   }
-}
 
-.apple-tab-bar ion-tab-button.tab-selected ion-icon {
-  transform: translateY(-1px);
-  transition: transform 0.2s ease;
-}
-
-.apple-tab-bar ion-label {
-  opacity: 0.85;
+  // Lo mostramos solo cuando tiene la clase seleccionada
+  &.tab-selected {
+    background: rgba(109, 40, 217, 0.1);
+    border-radius: 16px;
+    
+    ion-label {
+      display: block;
+      margin-left: 8px;
+    }
+  }
 }

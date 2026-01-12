@@ -12,10 +12,11 @@ import { AppHeaderComponent } from '../../../component/app-header/app-header.com
 import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
 import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 
+
 @Component({
   selector: 'app-completed-tasks',
   templateUrl: './completed-tasks.page.html',
-  styleUrls: ['./completed-tasks.page.scss'],
+  styleUrls: ['./completed-tasks.page.scss','../../../shared/scss/tasks.shared.scss'],
   standalone: true,
   imports: [
     IonicModule,
@@ -82,8 +83,9 @@ export class CompletedTasksPage implements OnInit {
         categories: this.categories,
         selected: [...this.activeCategoryFilters],
       },
-      initialBreakpoint: 0.4,
-      breakpoints: [0, 0.4, 0.7],
+     initialBreakpoint: 0.6, // Ahora se abrirá ocupando el 60% de la pantalla
+    breakpoints: [0, 0.6, 0.9], // Permite bajarla, dejarla al 60% o subirla casi al máximo
+    handle: true, // Muestra la barrita para que el usuario sepa que puede arrastrarla
     });
 
     modal.onDidDismiss().then(({ data }) => {

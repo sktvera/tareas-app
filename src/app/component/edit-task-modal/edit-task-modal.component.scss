@@ -1,0 +1,117 @@
+/* Variables locales */
+:host {
+  --primary-purple: #6a11cb;
+  --secondary-purple: #2575fc;
+  --purple-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --border-radius-md: 14px;
+}
+
+/* Header y Toolbar */
+ion-header {
+  background: #ffffff;
+}
+
+ion-toolbar {
+  --background: #ffffff;
+  --color: #1a1a1a;
+  padding: 8px 4px;
+  
+  ion-title {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+  }
+}
+
+/* Botón Cerrar Superior */
+.close-btn {
+  --color: var(--primary-purple);
+  --background: rgba(106, 17, 203, 0.08);
+  --border-radius: 12px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  height: 34px;
+  margin-right: 8px;
+}
+
+/* Contenedor de Formulario */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; // Espacio para que los labels no choquen
+  margin-top: 15px;
+}
+
+/* Estilo de Inputs y Select */
+.custom-input {
+  --border-radius: var(--border-radius-md);
+  --border-color: #e2e8f0;
+  --border-width: 1.5px;
+  --highlight-color-focused: var(--primary-purple);
+  --background: #ffffff;
+  
+  /* IMPORTANTE: Quitar el verde de validación de Ionic */
+  &.ion-valid {
+    --highlight-color-valid: var(--primary-purple);
+  }
+  
+  &.ion-invalid {
+    --highlight-color-invalid: #ff3b30;
+  }
+
+  &::part(label) {
+    font-weight: 700;
+    color: #4a5568;
+    background: white; // Hace que el label "corte" la línea del borde
+    padding: 0 6px;
+    margin-bottom: 8px;
+  }
+
+  &::part(container) {
+    transition: all 0.2s ease-in-out;
+  }
+
+  &.has-focus::part(container) {
+    box-shadow: 0 0 0 4px rgba(106, 17, 203, 0.1);
+    border-color: var(--primary-purple);
+  }
+}
+
+/* Específicos para el Select */
+ion-select.custom-input {
+  min-height: 56px;
+  --padding-start: 16px;
+}
+
+/* Botón Guardar Cambios */
+.save-button {
+  margin-top: 40px;
+  height: 58px;
+  --border-radius: var(--border-radius-md);
+  --box-shadow: 0 10px 25px rgba(106, 17, 203, 0.25);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+
+  &::part(native) {
+    background: var(--purple-gradient);
+    border: none;
+    transition: transform 0.2s ease;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  ion-icon {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+}
+
+/* Fondo de la página sutil */
+ion-content {
+  --background: #ffffff;
+}

@@ -1,11 +1,8 @@
 <!-- ===== HEADER ===== -->
-<ion-header translucent>
+<pp-app-header></pp-app-header>
 
-  <ion-toolbar>
-    <pp-app-header></pp-app-header>
-  </ion-toolbar>
 
-  <ion-toolbar>
+
     <app-task-toolbar
       [showCreate]="true"
       [activeFiltersCount]="activeCategoryFilters.length"
@@ -14,12 +11,12 @@
       (filterClick)="openCategoryModal()"
       (sortChange)="onSortChange($event)">
     </app-task-toolbar>
-  </ion-toolbar>
 
-</ion-header>
+
+
 
 <!-- ===== CONTENT ===== -->
-<ion-content fullscreen class="ion-padding">
+<ion-content  class="ion-padding">
 
   <!-- FORM CREAR -->
   <ion-card

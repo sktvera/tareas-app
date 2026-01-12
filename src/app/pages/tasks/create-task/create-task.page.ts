@@ -17,7 +17,7 @@ import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolb
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.page.html',
-  styleUrls: ['./create-task.page.scss'],
+  styleUrls: ['./create-task.page.scss','../../../shared/scss/tasks.shared.scss'],
   standalone: true,
   imports: [
     IonicModule,
@@ -142,8 +142,9 @@ assignTask(id: number, sliding?: IonItemSliding): void {
         categories: this.categories,
         selected: [...this.activeCategoryFilters],
       },
-      initialBreakpoint: 0.4,
-      breakpoints: [0, 0.4, 0.7],
+initialBreakpoint: 0.6, // Ahora se abrirá ocupando el 60% de la pantalla
+    breakpoints: [0, 0.6, 0.9], // Permite bajarla, dejarla al 60% o subirla casi al máximo
+    handle: true, // Muestra la barrita para que el usuario sepa que puede arrastrarla
     });
 
     modal.onDidDismiss().then(({ data }) => {

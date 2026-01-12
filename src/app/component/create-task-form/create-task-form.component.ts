@@ -15,8 +15,8 @@ import { CategoryService } from '../../service/category.service';
 })
 export class TaskFormComponent implements OnInit {
   categories: TaskCategory[] = [];
-  title = '';
-  description = '';
+  title: string = '';
+  description: string = '';
   category: TaskCategory | null = null;
 
   @Output() create = new EventEmitter<{
@@ -28,27 +28,39 @@ export class TaskFormComponent implements OnInit {
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  private loadCategories(): void {
     this.categories = this.categoryService.getCategories();
-    if (this.categories.length) {
+    if (this.categories.length > 0) {
       this.category = this.categories[0];
     }
   }
 
+  // Getter para validar el formulario de forma limpia en el HTML
+  get isFormValid(): boolean {
+    return this.title.trim().length > 0 && this.category !== null;
+  }
+
   submit(): void {
-    if (!this.title.trim() || !this.category) return;
+    if (this.isFormValid && this.category) {
+      this.create.emit({
+        title: this.title.trim(),
+        description: this.description.trim(),
+        category: this.category,
+      });
 
-    this.create.emit({
-      title: this.title,
-      description: this.description,
-      category: this.category,
-    });
-
-    this.resetForm();
+      this.resetForm();
+    }
   }
 
   private resetForm(): void {
     this.title = '';
     this.description = '';
-    this.category = this.categories.length ? this.categories[0] : null;
+    // Mantenemos la primera categoría seleccionada por defecto tras limpiar
+    if (this.categories.length > 0) {
+      this.category = this.categories[0];
+    }
   }
 }

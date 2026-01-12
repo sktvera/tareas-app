@@ -1,14 +1,102 @@
-ion-item {
-  border-radius: 14px;
-  margin-bottom: 8px;
+:host {
+  --primary-purple: #6a11cb;
+  --purple-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --soft-purple-selection: rgba(106, 17, 203, 0.08);
 }
 
-ion-item.selected {
-  background: rgba(var(--ion-color-primary-rgb), 0.08);
+/* Header estilizado */
+ion-header {
+  ion-toolbar {
+    --background: #ffffff;
+    --color: #1a1a1a;
+    padding-top: 8px;
+    
+    ion-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+  }
 }
 
-.apply-button {
-  margin-top: 24px;
-  --border-radius: 14px;
+.clear-btn {
+color: white;
   font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Contenedor de lista */
+.list-container {
+  margin-top: 10px;
+}
+
+.category-item {
+  --background: #f8f9fa;
+  --border-radius: 16px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid transparent;
+
+  &::part(native) {
+    height: 60px;
+  }
+
+  ion-label {
+    font-weight: 500;
+    color: #4a5568;
+    transition: color 0.2s;
+  }
+
+  .category-icon {
+    color: #a0aec0;
+    font-size: 20px;
+  }
+
+  /* ESTADO SELECCIONADO: Aquí es donde marcas la diferencia */
+  &.selected {
+    --background: var(--soft-purple-selection);
+    border: 2px solid var(--primary-purple); // Borde morado claro para resaltar
+    
+    ion-label {
+      font-weight: 700;
+      color: var(--primary-purple);
+    }
+
+    .category-icon {
+      color: var(--primary-purple);
+    }
+
+    .check-icon {
+      color: var(--primary-purple);
+      font-size: 24px;
+    }
+  }
+}
+
+/* Botón Aplicar Filtros */
+.apply-button {
+  margin-top: 30px;
+  height: 56px;
+  --border-radius: 16px;
+  --box-shadow: 0 8px 20px rgba(106, 17, 203, 0.25);
+  font-weight: 700;
+
+  &::part(native) {
+    background: var(--purple-gradient);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Animación simple para el check */
+.animated-pop {
+  animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
