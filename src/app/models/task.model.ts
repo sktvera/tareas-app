@@ -16,4 +16,5 @@ export interface Task {
   category: TaskCategory;
   status: TaskStatus;
   createdAt: Date;
+  swiped?: boolean;
 }

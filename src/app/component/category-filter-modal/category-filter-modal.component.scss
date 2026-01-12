@@ -1,0 +1,14 @@
+ion-item {
+  border-radius: 14px;
+  margin-bottom: 8px;
+}
+
+ion-item.selected {
+  background: rgba(var(--ion-color-primary-rgb), 0.08);
+}
+
+.apply-button {
+  margin-top: 24px;
+  --border-radius: 14px;
+  font-weight: 600;
+}

@@ -1,0 +1,45 @@
+<ion-card class="form-card">
+  <ion-card-content>
+
+    <ion-item lines="none">
+      <ion-input
+        label="Título"
+        labelPlacement="stacked"
+        placeholder="Ej: Comprar mercado"
+        [(ngModel)]="title">
+      </ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-textarea
+        label="Descripción"
+        labelPlacement="stacked"
+        placeholder="Detalles opcionales"
+        autoGrow="true"
+        [(ngModel)]="description">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-select
+        label="Categoría"
+        labelPlacement="stacked"
+        interface="popover"
+        [(ngModel)]="category">
+        <ion-select-option
+          *ngFor="let cat of categories"
+          [value]="cat">
+          {{ cat }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button
+      expand="block"
+      class="create-button"
+      (click)="submit()">
+      Crear tarea
+    </ion-button>
+
+  </ion-card-content>
+</ion-card>

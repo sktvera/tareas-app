@@ -1,2 +1,12 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+:root {
+  --ion-color-primary: #6d28d9; // morado elegante
+  --ion-color-primary-rgb: 109, 40, 217;
+
+  --ion-background-color: #ffffff;
+  --ion-text-color: #1c1c1e;
+
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+    'Inter', system-ui, sans-serif;
+}
