@@ -1,7 +1,7 @@
 <pp-app-header></pp-app-header>
 
 <app-task-toolbar
-  [activeFiltersCount]="activeCategory ? 1 : 0"
+  [activeFiltersCount]="activeCategoryFilters.length"
   (searchChange)="onSearchChange($event)"
   (filterClick)="openCategoryModal()"
   (sortChange)="onSortChange($event)">
@@ -10,10 +10,7 @@
 <ion-content class="ion-padding">
 
   <!-- ===== FILTROS ===== -->
-  <app-task-filters
 
-    (searchChange)="onSearchChange($event)">
-  </app-task-filters>
 
   <!-- ===== LISTA ===== -->
   <ion-list *ngIf="tasks.length; else empty" class="task-list">

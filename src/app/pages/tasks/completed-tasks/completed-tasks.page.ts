@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../../../service/task.service';
 import { Task, TaskCategory } from '../../../models/task.model';
+import { CategoryService } from '../../../service/category.service';
 
-import { TaskFiltersComponent } from '../../../component/task-filters/task-filters.component';
+
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
 import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
-import { ModalController } from '@ionic/angular';
 import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 
 @Component({
@@ -20,37 +20,49 @@ import { CategoryFilterModalComponent } from '../../../component/category-filter
   imports: [
     IonicModule,
     CommonModule,
-    TaskFiltersComponent,
-    AppHeaderComponent,
     FormsModule,
+    AppHeaderComponent,
     TaskToolbarComponent,
   ],
 })
-export class CompletedTasksPage {
+export class CompletedTasksPage implements OnInit {
 
   tasks: Task[] = [];
-
-  activeCategory?: TaskCategory;
+  categories: TaskCategory[] = [];
+  activeCategoryFilters: TaskCategory[] = []; // ✅ array de filtros
   searchText = '';
   sortDirection: 'ASC' | 'DESC' = 'ASC';
 
   constructor(
     private taskService: TaskService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private categoryService: CategoryService,
+
   ) {}
+  ngOnInit(): void {
+ this.categories = this.categoryService.getCategories();
+  }
 
   ionViewWillEnter(): void {
     this.loadTasks();
   }
 
   loadTasks(): void {
-    this.tasks = this.taskService
-      .getTasksByStatus('COMPLETED', this.activeCategory, this.searchText)
-      .sort((a, b) =>
-        this.sortDirection === 'ASC'
-          ? a.title.localeCompare(b.title)
-          : b.title.localeCompare(a.title)
+    let result = this.taskService.getTasksByStatus('COMPLETED', undefined, this.searchText);
+
+    // Filtrar por categorías seleccionadas
+    if (this.activeCategoryFilters.length) {
+      result = result.filter(task =>
+        this.activeCategoryFilters.includes(task.category)
       );
+    }
+
+    // Ordenar
+    this.tasks = result.sort((a, b) =>
+      this.sortDirection === 'ASC'
+        ? a.title.localeCompare(b.title)
+        : b.title.localeCompare(a.title)
+    );
   }
 
   onSearchChange(value: string): void {
@@ -66,12 +78,17 @@ export class CompletedTasksPage {
   async openCategoryModal(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: CategoryFilterModalComponent,
-      componentProps: { selected: this.activeCategory }
+      componentProps: {
+        categories: this.categories,
+        selected: [...this.activeCategoryFilters],
+      },
+      initialBreakpoint: 0.4,
+      breakpoints: [0, 0.4, 0.7],
     });
 
     modal.onDidDismiss().then(({ data }) => {
-      if (data !== undefined) {
-        this.activeCategory = data;
+      if (data) {
+        this.activeCategoryFilters = data;
         this.loadTasks();
       }
     });

@@ -31,12 +31,5 @@ export const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'task-filter',
-    loadComponent: () => import('./component/task-filters/task-filters.component').then( m => m.TaskFiltersComponent)
-  },
-  {
-    path: 'task-filterionic',
-    loadComponent: () => import('./component/task-filters/task-filters.component').then( m => m.TaskFiltersComponent)
-  },
+  
 ];
