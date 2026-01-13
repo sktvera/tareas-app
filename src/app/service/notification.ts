@@ -16,7 +16,7 @@ export class NotificationService {
    */
   async show(message: string, type: 'success' | 'error' | 'info' = 'success', icon?: string) {
     
-    // Definimos iconos por defecto según el tipo si no se envía uno
+    // Definimos iconos por defecto 
     const defaultIcons = {
       success: 'checkmark-circle-outline',
       error: 'alert-circle-outline',
@@ -28,7 +28,7 @@ export class NotificationService {
       duration: 2500,
       position: 'top',
       icon: icon || defaultIcons[type],
-      cssClass: `custom-toast toast-${type}`, // Clases dinámicas para el CSS
+      cssClass: `custom-toast toast-${type}`, // Clases dinámicas
       buttons: [
         {
           text: 'Cerrar',

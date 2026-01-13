@@ -29,11 +29,8 @@ export class MyTasksPage implements OnInit {
 
   tasks: Task[] = [];
   categories: TaskCategory[] = [];
-
   searchText = '';
   sortDirection: 'ASC' | 'DESC' = 'ASC';
-
-  // ✅ filtros activos
   activeCategoryFilters: TaskCategory[] = [];
 
   constructor(
@@ -59,14 +56,14 @@ export class MyTasksPage implements OnInit {
       this.searchText
     );
 
-    // ✅ FILTRO POR CATEGORÍA (MULTI)
+    // FILTRO POR CATEGORÍA 
     if (this.activeCategoryFilters.length) {
       result = result.filter(task =>
         this.activeCategoryFilters.includes(task.category)
       );
     }
 
-    // ✅ ORDENAMIENTO
+    //  ORDENAMIENTO
     result = result.sort((a, b) =>
       this.sortDirection === 'ASC'
         ? a.title.localeCompare(b.title)
@@ -76,21 +73,21 @@ export class MyTasksPage implements OnInit {
     this.tasks = result;
   }
 
-  /* ===== BUSCADOR ===== */
+  /*  BUSCADOR  */
 
   onSearchChange(value: string): void {
     this.searchText = value;
     this.loadTasks();
   }
 
-  /* ===== ORDEN ===== */
+
 
   onSortChange(direction: 'ASC' | 'DESC'): void {
     this.sortDirection = direction;
     this.loadTasks();
   }
 
-  /* ===== FILTRO POR CATEGORÍA ===== */
+  /* FILTRO POR CATEGORÍA*/
 
   async openCategoryModal(): Promise<void> {
     const modal = await this.modalCtrl.create({
@@ -99,9 +96,9 @@ export class MyTasksPage implements OnInit {
         categories: this.categories,
         selected: [...this.activeCategoryFilters],
       },
-     initialBreakpoint: 0.6, // Ahora se abrirá ocupando el 60% de la pantalla
-    breakpoints: [0, 0.6, 0.9], // Permite bajarla, dejarla al 60% o subirla casi al máximo
-    handle: true, // Muestra la barrita para que el usuario sepa que puede arrastrarla
+     initialBreakpoint: 0.6, 
+    breakpoints: [0, 0.6, 0.9], 
+    handle: true, 
     });
 
     modal.onDidDismiss().then(({ data }) => {
@@ -114,7 +111,7 @@ export class MyTasksPage implements OnInit {
     await modal.present();
   }
 
-  /* ===== ACCIONES ===== */
+  /*  ACCIONES  */
 
   completeTask(id: number): void {
     this.taskService.completeTask(id);
@@ -136,7 +133,7 @@ export class MyTasksPage implements OnInit {
       .create({
         component: EditTaskModalComponent,
         componentProps: { task },
-        initialBreakpoint: 0.4, // Se abre ocupando el 70%
+        initialBreakpoint: 0.4, 
     breakpoints: [0, 0.7, 0.95],
     handle: true
       })

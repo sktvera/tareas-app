@@ -30,7 +30,7 @@ export class CompletedTasksPage implements OnInit {
 
   tasks: Task[] = [];
   categories: TaskCategory[] = [];
-  activeCategoryFilters: TaskCategory[] = []; // ✅ array de filtros
+  activeCategoryFilters: TaskCategory[] = [];
   searchText = '';
   sortDirection: 'ASC' | 'DESC' = 'ASC';
 
@@ -51,7 +51,7 @@ export class CompletedTasksPage implements OnInit {
   loadTasks(): void {
     let result = this.taskService.getTasksByStatus('COMPLETED', undefined, this.searchText);
 
-    // Filtrar por categorías seleccionadas
+ 
     if (this.activeCategoryFilters.length) {
       result = result.filter(task =>
         this.activeCategoryFilters.includes(task.category)
@@ -83,9 +83,9 @@ export class CompletedTasksPage implements OnInit {
         categories: this.categories,
         selected: [...this.activeCategoryFilters],
       },
-     initialBreakpoint: 0.6, // Ahora se abrirá ocupando el 60% de la pantalla
-    breakpoints: [0, 0.6, 0.9], // Permite bajarla, dejarla al 60% o subirla casi al máximo
-    handle: true, // Muestra la barrita para que el usuario sepa que puede arrastrarla
+     initialBreakpoint: 0.6, 
+    breakpoints: [0, 0.6, 0.9], 
+    handle: true, 
     });
 
     modal.onDidDismiss().then(({ data }) => {

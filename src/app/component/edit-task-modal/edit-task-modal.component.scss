@@ -6,7 +6,7 @@
   --border-radius-md: 14px;
 }
 
-/* Header y Toolbar */
+
 ion-header {
   background: #ffffff;
 }
@@ -23,7 +23,7 @@ ion-toolbar {
   }
 }
 
-/* Botón Cerrar Superior */
+
 .close-btn {
   --color: var(--primary-purple);
   --background: rgba(106, 17, 203, 0.08);
@@ -36,15 +36,15 @@ ion-toolbar {
   margin-right: 8px;
 }
 
-/* Contenedor de Formulario */
+
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 8px; // Espacio para que los labels no choquen
+  gap: 8px; 
   margin-top: 15px;
 }
 
-/* Estilo de Inputs y Select */
+
 .custom-input {
   --border-radius: var(--border-radius-md);
   --border-color: #e2e8f0;
@@ -52,7 +52,7 @@ ion-toolbar {
   --highlight-color-focused: var(--primary-purple);
   --background: #ffffff;
   
-  /* IMPORTANTE: Quitar el verde de validación de Ionic */
+
   &.ion-valid {
     --highlight-color-valid: var(--primary-purple);
   }
@@ -64,7 +64,7 @@ ion-toolbar {
   &::part(label) {
     font-weight: 700;
     color: #4a5568;
-    background: white; // Hace que el label "corte" la línea del borde
+    background: white; 
     padding: 0 6px;
     margin-bottom: 8px;
   }
@@ -79,13 +79,13 @@ ion-toolbar {
   }
 }
 
-/* Específicos para el Select */
+
 ion-select.custom-input {
   min-height: 56px;
   --padding-start: 16px;
 }
 
-/* Botón Guardar Cambios */
+
 .save-button {
   margin-top: 40px;
   height: 58px;
@@ -111,7 +111,7 @@ ion-select.custom-input {
   }
 }
 
-/* Fondo de la página sutil */
+
 ion-content {
   --background: #ffffff;
 }

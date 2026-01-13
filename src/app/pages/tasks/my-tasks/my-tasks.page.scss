@@ -1,0 +1,17 @@
+/* ==========================
+   ICONOS INLINE EN TAREAS
+========================== */
+.inline-actions ion-button {
+  --background: transparent;  
+}
+
+.inline-actions ion-button ion-icon {
+  color: #ffffff; 
+  font-size: 18px; 
+}
+
+
+.inline-actions ion-button[color="danger"] ion-icon {
+  color: #ffffff; 
+}
+

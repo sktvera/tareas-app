@@ -1,5 +1,5 @@
 /* ===============================
-   TASK LIST & ITEMS
+   TASK LIST & ITEMS Pages
 ================================ */
 
 .task-list {
@@ -17,12 +17,12 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 16px;
-  background: #ffffff; /* Blanco */
+  background: #ffffff; 
   box-shadow: 0 6px 18px rgba(154, 150, 150, 0.05);
   padding: 12px;
 }
 
-/* Layout label-content */
+//Layout  
 .label-content {
   display: flex;
   align-items: center;
@@ -44,20 +44,19 @@ ion-label {
 
 .task-item p {
   font-size: 13px;
-  color: #6b7280; /* gris suave */
+  color: #6b7280; 
   margin: 4px 0 6px;
 }
 
-/* ===============================
-   BADGES & FILTERS
-================================ */
+//FILTERS
+
 ion-badge {
   border-radius: 12px;
   font-size: 11px;
   font-weight: 500;
   padding: 4px 8px;
   color: #fff;
-  background-color: #6d28d9; /* morado */
+  background-color: #6d28d9; 
 }
 
 .filter-badge {
@@ -73,12 +72,12 @@ ion-badge {
   font-size: 10px;
 }
 
-/* ===============================
-   ICONOS
-================================ */
+
+// ICONOS
+
 .completed-icon {
   font-size: 20px;
-  color: #d4af37; /* dorado */
+  color: #d4af37; 
   margin-left: 8px;
 }
 
@@ -88,16 +87,16 @@ ion-badge {
 }
 
 .inline-actions ion-button[color="danger"] ion-icon {
-  color: #d4af37; /* dorado para eliminar si quieres un detalle elegante */
+  color: #d4af37; 
 }
 
 .active-icon {
   color: #6d28d9;
 }
 
-/* ===============================
-   SWIPE OPTIONS
-================================ */
+
+// SWIPE OPTIONS
+
 ion-item-option {
   font-weight: 600;
   font-size: 14px;
@@ -109,7 +108,7 @@ ion-item-option ion-icon {
   margin-bottom: 4px;
 }
 
-/* Indicador swipe */
+
 .swipe-hint {
   margin-left: auto;
   font-size: 18px;
@@ -124,9 +123,7 @@ ion-item-option ion-icon {
   100% { transform: translateX(0); opacity: 0.3; }
 }
 
-/* ===============================
-   EMPTY STATE
-================================ */
+
 .empty-state {
   margin-top: 60px;
   text-align: center;
@@ -138,9 +135,7 @@ ion-item-option ion-icon {
   margin-bottom: 8px;
 }
 
-/* ===============================
-   FORM CREAR
-================================ */
+
 .create-form-container {
   overflow: hidden;
   max-height: 0;
@@ -155,17 +150,13 @@ ion-item-option ion-icon {
   transform: translateY(0);
 }
 
-/* ===============================
-   DIVIDER
-================================ */
+
 .section-divider {
   margin: 24px 0;
   opacity: 0.35;
 }
 
-/* ===============================
-   RESPONSIVE
-================================ */
+
 @media (max-width: 400px) {
   .task-item h2 { font-size: 14px; }
   .task-item p { font-size: 12px; }

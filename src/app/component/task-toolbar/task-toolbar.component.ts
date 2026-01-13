@@ -1,35 +1,52 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 export type SortDirection = 'ASC' | 'DESC';
 
 @Component({
   selector: 'app-task-toolbar',
   standalone: true,
-  imports: [IonicModule, CommonModule],
+  imports: [IonicModule, CommonModule, FormsModule],
   templateUrl: './task-toolbar.component.html',
   styleUrls: ['./task-toolbar.component.scss'],
 })
 export class TaskToolbarComponent {
 
-  /* ===== CONFIG ===== */
   @Input() showCreate = false;
   @Input() activeFiltersCount = 0;
 
-  /* ===== STATE ===== */
   searchText = '';
   sortDirection: SortDirection = 'ASC';
+  loading = false;
 
-  /* ===== EVENTS ===== */
   @Output() create = new EventEmitter<void>();
   @Output() searchChange = new EventEmitter<string>();
   @Output() filterClick = new EventEmitter<void>();
   @Output() sortChange = new EventEmitter<SortDirection>();
 
-  onSearch(value: string) {
+  private typingTimeout?: any;
+
+  onInput(value: string) {
     this.searchText = value;
-    this.searchChange.emit(value);
+    this.loading = true;
+
+    // Reinicia el timeout cada vez que escribe
+    if (this.typingTimeout) clearTimeout(this.typingTimeout);
+
+    // Cuando deja de escribir 1s → dispara búsqueda y quita spinner
+    this.typingTimeout = setTimeout(() => {
+      this.loading = false;
+      this.searchChange.emit(this.searchText);
+    }, 1000);
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.loading = false;
+    if (this.typingTimeout) clearTimeout(this.typingTimeout);
+    this.searchChange.emit('');
   }
 
   toggleSort() {

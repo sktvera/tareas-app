@@ -1,9 +1,6 @@
-/* ============================= */
-/* ===== PALETA DE COLORES ===== */
-/* ============================= */
-
+// Branding Colors 
 :root {
-  /* Colores base */
+
   --ion-color-primary: #6d28d9;       /* Morado principal */
   --ion-color-primary-rgb: 109, 40, 217;
   --ion-color-primary-contrast: #ffffff;
@@ -17,7 +14,7 @@
   --ion-color-tertiary-rgb: 255, 255, 255;
   --ion-color-tertiary-contrast: #eee6e6;
 
-  /* Grises neutros para textos y detalles */
+// Grises neutros para textos y detalles
   --ion-color-medium: #a3a3a3;        /* Texto secundario */
   --ion-color-light: #f5f5f7;         /* Fondo de secciones */
 }

@@ -1,6 +1,6 @@
 <ion-toolbar class="apple-header">
 
-  <!-- ===== CREAR (SOLO CREATE PAGE) ===== -->
+  <!-- ===== CREAR ===== -->
   <ion-buttons slot="start" *ngIf="showCreate">
     <ion-button fill="clear" (click)="create.emit()">
       <ion-icon name="add-circle-outline"></ion-icon>
@@ -10,37 +10,31 @@
   <!-- ===== SEARCH ===== -->
   <div class="search-wrapper">
     <ion-searchbar
-      [value]="searchText"
-      (ionInput)="onSearch($event.detail.value!)"
+      [(ngModel)]="searchText"
+      (ionInput)="onInput($event.detail.value!)"
       placeholder="Buscar tareas"
-      debounce="300"
-      animated>
+      animated
+      showClearButton="always"
+      debounce="0">
     </ion-searchbar>
+
+    <!-- Spinner mientras escribe -->
+    <ion-spinner *ngIf="loading" name="dots" class="search-spinner"></ion-spinner>
   </div>
 
   <!-- ===== ACTIONS ===== -->
   <ion-buttons slot="end">
-
     <!-- FILTER -->
     <ion-button fill="clear" (click)="filterClick.emit()">
       <ion-icon name="funnel-outline"></ion-icon>
-
-      <ion-badge
-        *ngIf="activeFiltersCount"
-        class="filter-badge">
+      <ion-badge *ngIf="activeFiltersCount" class="filter-badge">
         {{ activeFiltersCount }}
       </ion-badge>
     </ion-button>
 
     <!-- SORT -->
     <ion-button fill="clear" (click)="toggleSort()">
-      <ion-icon
-        [name]="sortDirection === 'ASC'
-          ? 'arrow-up-outline'
-          : 'arrow-down-outline'">
-      </ion-icon>
+      <ion-icon [name]="sortDirection === 'ASC' ? 'arrow-up-outline' : 'arrow-down-outline'"></ion-icon>
     </ion-button>
-
   </ion-buttons>
-
 </ion-toolbar>

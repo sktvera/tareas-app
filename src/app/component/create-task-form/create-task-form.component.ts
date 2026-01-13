@@ -38,7 +38,7 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
-  // Getter para validar el formulario de forma limpia en el HTML
+
   get isFormValid(): boolean {
     return this.title.trim().length > 0 && this.category !== null;
   }

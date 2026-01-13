@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../../../service/task.service';
 import { CategoryService } from '../../../service/category.service';
-import { NotificationService } from '../../../service/notification'; // <-- IMPORTADO
+import { NotificationService } from '../../../service/notification';
 import { Task, TaskCategory } from '../../../models/task.model';
 
 import { TaskFormComponent } from '../../../component/create-task-form/create-task-form.component';
@@ -45,34 +45,11 @@ export class CreateTaskPage implements OnInit {
     private taskService: TaskService,
     private categoryService: CategoryService,
     private modalCtrl: ModalController,
-    private notification: NotificationService // <-- INYECTADO
+    private notification: NotificationService 
   ) {}
 
   ngOnInit(): void {
     this.categories = this.categoryService.getCategories();
-
-    // 🔔 Simulación de notificaciones periódicas cada 15 segundos
-    setInterval(() => {
-      if (this.tasks.length === 0) return;
-
-      // Escoge una tarea aleatoria
-      const task = this.tasks[Math.floor(Math.random() * this.tasks.length)];
-
-      // Escoge un tipo aleatorio
-      const types: ('success' | 'info' | 'error')[] = ['success', 'info', 'error'];
-      const type = types[Math.floor(Math.random() * types.length)];
-
-      // Mensajes aleatorios
-      const messages = [
-        `Recuerda completar: ${task.title}`,
-        `Tarea asignada: ${task.title}`,
-        `¡Buen trabajo con: ${task.title}!`
-      ];
-      const message = messages[Math.floor(Math.random() * messages.length)];
-
-      // Mostrar notificación
-      this.notification.show(message, type);
-    }, 15000); // cada 15 segundos
   }
 
   ionViewWillEnter(): void {
@@ -88,7 +65,7 @@ export class CreateTaskPage implements OnInit {
     );
     this.loadTasks();
 
-    // 🔔 Notificación informativa extra
+  
     this.notification.show(
       `Recuerda: Puedes filtrar tus tareas por categoría: ${event.category}`,
       'info'
@@ -97,7 +74,7 @@ export class CreateTaskPage implements OnInit {
 
   assignTask(id: number, sliding?: IonItemSliding): void {
     this.taskService.assignTask(id);
-    sliding?.close(); // 👈 cierre suave del swipe
+    sliding?.close(); 
     this.loadTasks();
   }
 
@@ -115,7 +92,7 @@ export class CreateTaskPage implements OnInit {
       );
     }
 
-    // 🔥 Ordenamiento por nombre
+    //Ordenamiento 
     result = result.sort((a, b) => {
       const nameA = a.title.toLowerCase();
       const nameB = b.title.toLowerCase();
@@ -128,7 +105,7 @@ export class CreateTaskPage implements OnInit {
     this.tasks = result;
   }
 
-  /* ===== BUSCADOR ===== */
+  /*  BUSCADOR  */
   toggleSearch(): void {
     this.searchActive = !this.searchActive;
     if (!this.searchActive) {
@@ -142,12 +119,12 @@ export class CreateTaskPage implements OnInit {
     this.loadTasks();
   }
 
-  /* ===== FORM ===== */
+
   toggleCreateForm(): void {
     this.showCreateForm = !this.showCreateForm;
   }
 
-  /* ===== FILTROS ===== */
+  /*  FILTROS  */
   async openCategoryModal(): Promise<void> {
     const modal = await this.modalCtrl.create({
       component: CategoryFilterModalComponent,
@@ -170,7 +147,7 @@ export class CreateTaskPage implements OnInit {
     await modal.present();
   }
 
-  /* ===== ORDEN ===== */
+  /*  ORDEN  */
   toggleSorting(): void {
     this.sortDirection = this.sortDirection === 'ASC' ? 'DESC' : 'ASC';
     this.loadTasks();

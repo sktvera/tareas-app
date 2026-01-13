@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task, TaskStatus, TaskCategory } from '../models/task.model';
-import { NotificationService } from '../service/notification'; // Asegúrate de que la ruta sea correcta
+import { NotificationService } from '../service/notification'; 
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,6 @@ export class TaskService {
       status: 'PENDING',
       createdAt: new Date(),
     });
-    // Notificación morada de éxito
     this.notification.show('¡Tarea creada con éxito!', 'success', 'sparkles-outline');
   }
 
@@ -76,7 +75,7 @@ export class TaskService {
     this.notification.show('Tarea devuelta a pendientes', 'info', 'arrow-back-circle-outline');
   }
 
-  /** 🔥 NUEVO: COMPLETED → ASSIGNED */
+
   returnToAssigned(id: number): void {
     this.updateStatus(id, 'ASSIGNED');
     this.notification.show('Tarea movida a asignadas', 'info', 'people-outline');

@@ -1,29 +1,27 @@
-/* Asegura que el contenido de las páginas no quede oculto detrás de la barra flotante */
+
 ion-router-outlet {
-  padding-bottom: 100px; /* Suficiente espacio para que la barra no tape el último item */
+  padding-bottom: 100px; 
 }
 
 .apple-tab-bar {
-  /* ... tus estilos anteriores ... */
-  
-  // Asegúrate de que la barra siempre esté por encima del contenido
+
   z-index: 10; 
-  // Evita que los botones se salgan del contenedor al expandirse
+
   contain: none; 
 }
 
-/* Efecto de mostrar texto solo al seleccionar */
+
 ion-tab-button {
   --color: #8e8e93;
   --color-selected: #6d28d9;
   
-  // Ocultamos el label por defecto
+
   ion-label {
     display: none; 
     transition: all 0.3s ease;
   }
 
-  // Lo mostramos solo cuando tiene la clase seleccionada
+
   &.tab-selected {
     background: rgba(109, 40, 217, 0.1);
     border-radius: 16px;

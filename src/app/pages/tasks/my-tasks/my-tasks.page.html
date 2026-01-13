@@ -1,28 +1,19 @@
 <pp-app-header></pp-app-header>
 
-<app-task-toolbar
-  [activeFiltersCount]="activeCategoryFilters.length"
-  (searchChange)="onSearchChange($event)"
-  (filterClick)="openCategoryModal()"
-  (sortChange)="onSortChange($event)">
+<app-task-toolbar [activeFiltersCount]="activeCategoryFilters.length" (searchChange)="onSearchChange($event)"
+  (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
 </app-task-toolbar>
 
 <ion-content class="ion-padding">
 
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding
-      *ngFor="let task of tasks"
-      class="task-sliding"
-      (ionItemSlidingDidOpen)="task.swiped = true"
+    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding" (ionItemSlidingDidOpen)="task.swiped = true"
       (ionItemSlidingDidClose)="task.swiped = false">
 
       <!-- ===== SWIPE IZQUIERDA → DESCARTAR ===== -->
       <ion-item-options side="start">
-        <ion-item-option
-          color="warning"
-          expandable
-          (click)="discardTask(task.id)">
+        <ion-item-option color="warning" expandable (click)="discardTask(task.id)">
           <ion-icon name="arrow-back-circle-outline"></ion-icon>
           Descartar
         </ion-item-option>
@@ -40,24 +31,17 @@
             <ion-badge color="medium">
               {{ task.category }}
             </ion-badge>
-            
-            
+
+
           </ion-label>
 
           <!-- ACCIONES INLINE -->
           <div class="inline-actions">
 
-<ion-button
-  fill="clear"
-  size="small"
-  (click)="openEdit(task)">
-  <ion-icon slot="icon-only" name="create-outline"></ion-icon>
-</ion-button>
-            <ion-button
-              fill="clear"
-              size="small"
-              color="danger"
-              (click)="deleteTask(task.id)">
+            <ion-button fill="clear" size="small" (click)="openEdit(task)">
+              <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" size="small" color="danger" (click)="deleteTask(task.id)">
               <ion-icon name="trash-outline"></ion-icon>
             </ion-button>
 
@@ -69,10 +53,7 @@
 
       <!-- ===== SWIPE DERECHA → COMPLETAR ===== -->
       <ion-item-options side="end">
-        <ion-item-option
-          color="success"
-          expandable
-          (click)="completeTask(task.id)">
+        <ion-item-option color="success" expandable (click)="completeTask(task.id)">
           <ion-icon name="checkmark-circle-outline"></ion-icon>
           Completar
         </ion-item-option>

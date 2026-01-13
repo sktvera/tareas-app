@@ -1,31 +1,17 @@
 <!-- ===== HEADER ===== -->
 <pp-app-header></pp-app-header>
 
-
-
-    <app-task-toolbar
-      [showCreate]="true"
-      [activeFiltersCount]="activeCategoryFilters.length"
-      (create)="toggleCreateForm()"
-      (searchChange)="onSearchChange($event)"
-      (filterClick)="openCategoryModal()"
-      (sortChange)="onSortChange($event)">
-    </app-task-toolbar>
-
-
-
+<app-task-toolbar [showCreate]="true" [activeFiltersCount]="activeCategoryFilters.length" (create)="toggleCreateForm()"
+  (searchChange)="onSearchChange($event)" (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
+</app-task-toolbar>
 
 <!-- ===== CONTENT ===== -->
-<ion-content  class="ion-padding">
+<ion-content class="ion-padding">
 
   <!-- FORM CREAR -->
-  <ion-card
-    *ngIf="showCreateForm"
-    class="create-form-card">
+  <ion-card *ngIf="showCreateForm" class="create-form-card">
 
-    <app-task-form
-      [categories]="categories"
-      (create)="createTask($event); showCreateForm = false">
+    <app-task-form [categories]="categories" (create)="createTask($event); showCreateForm = false">
     </app-task-form>
 
   </ion-card>
@@ -35,10 +21,7 @@
   <!-- LISTA -->
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding
-      *ngFor="let task of tasks"
-      class="task-sliding"
-      (ionItemSlidingDidOpen)="task.swiped = true"
+    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding" (ionItemSlidingDidOpen)="task.swiped = true"
       (ionItemSlidingDidClose)="task.swiped = false">
 
       <ion-item lines="none" class="task-item">
@@ -51,19 +34,13 @@
           </ion-badge>
         </ion-label>
 
-        <ion-icon
-          *ngIf="!task.swiped"
-          name="chevron-forward-outline"
-          class="swipe-hint">
+        <ion-icon *ngIf="!task.swiped" name="chevron-forward-outline" class="swipe-hint">
         </ion-icon>
 
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option
-          color="success"
-          expandable
-          (click)="assignTask(task.id)">
+        <ion-item-option color="success" expandable (click)="assignTask(task.id)">
           <ion-icon name="checkmark-circle-outline"></ion-icon>
           Asignar
         </ion-item-option>
