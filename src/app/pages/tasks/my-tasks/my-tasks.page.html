@@ -1,65 +1,75 @@
-<pp-app-header></pp-app-header>
-
-<app-task-toolbar [activeFiltersCount]="activeCategoryFilters.length" (searchChange)="onSearchChange($event)"
-  (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
-</app-task-toolbar>
+<ion-header>
+  <pp-app-header></pp-app-header>
+  <app-task-toolbar [activeFiltersCount]="activeCategoryFilters.length" (searchChange)="onSearchChange($event)"
+    (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
+  </app-task-toolbar>
+</ion-header>
 
 <ion-content class="ion-padding">
 
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding" (ionItemSlidingDidOpen)="task.swiped = true"
-      (ionItemSlidingDidClose)="task.swiped = false">
+    <ion-item *ngFor="let task of tasks" lines="none" class="task-item">
 
-      <!-- ===== SWIPE IZQUIERDA → DESCARTAR ===== -->
-      <ion-item-options side="start">
-        <ion-item-option color="warning" expandable (click)="discardTask(task.id)">
-          <ion-icon [icon]="arrowBackCircleIcon"></ion-icon>
-          Descartar
-        </ion-item-option>
-      </ion-item-options>
+      <div class="task-content">
+        
+        <!-- TEXTO -->
+        <ion-label class="task-label">
+          <h2>{{ task.title }}</h2>
+          <p>{{ task.description }}</p>
+          <ion-badge color="medium">
+            {{ task.category }}
+          </ion-badge>
+        </ion-label>
 
-      <!-- ===== ITEM ===== -->
-      <ion-item lines="none" class="task-item">
+        <!-- ACCIONES -->
+        <div class="task-actions">
+          
+          <!-- Botones principales -->
+          <ion-button 
+            fill="solid" 
+            color="warning" 
+            size="small" 
+            class="action-button discard-button"
+            (click)="discardTask(task.id)">
+            <ion-icon slot="start" [icon]="arrowBackCircleIcon"></ion-icon>
+            Descartar
+          </ion-button>
 
-        <div class="label-content">
+          <ion-button 
+            fill="solid" 
+            color="success" 
+            size="small" 
+            class="action-button complete-button"
+            (click)="completeTask(task.id)">
+            <ion-icon slot="start" [icon]="checkmarkCircleIcon"></ion-icon>
+            Completar
+          </ion-button>
 
-          <!-- TEXTO -->
-          <ion-label>
-            <h2>{{ task.title }}</h2>
-            <p>{{ task.description }}</p>
-            <ion-badge color="medium">
-              {{ task.category }}
-            </ion-badge>
-
-
-          </ion-label>
-
-          <!-- ACCIONES INLINE -->
-          <div class="inline-actions">
-
-            <ion-button fill="clear" size="small" (click)="openEdit(task)">
+          <!-- Botones secundarios -->
+          <div class="secondary-actions">
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              class="icon-button"
+              (click)="openEdit(task)">
               <ion-icon slot="icon-only" [icon]="createIcon"></ion-icon>
             </ion-button>
-            <ion-button fill="clear" size="small" color="danger" (click)="deleteTask(task.id)">
-              <ion-icon [icon]="trashIcon"></ion-icon>
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              color="danger" 
+              class="icon-button"
+              (click)="deleteTask(task.id)">
+              <ion-icon slot="icon-only" [icon]="trashIcon"></ion-icon>
             </ion-button>
-
           </div>
 
         </div>
 
-      </ion-item>
+      </div>
 
-      <!-- ===== SWIPE DERECHA → COMPLETAR ===== -->
-      <ion-item-options side="end">
-        <ion-item-option color="success" expandable (click)="completeTask(task.id)">
-          <ion-icon [icon]="checkmarkCircleIcon"></ion-icon>
-          Completar
-        </ion-item-option>
-      </ion-item-options>
-
-    </ion-item-sliding>
+    </ion-item>
 
   </ion-list>
 

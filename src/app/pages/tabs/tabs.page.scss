@@ -1,34 +1,67 @@
-
 ion-router-outlet {
-  padding-bottom: 100px; 
+  padding-bottom: 80px;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+  overflow: visible;
+}
+
+ion-tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .apple-tab-bar {
-
-  z-index: 10; 
-
-  contain: none; 
+  z-index: 5;
+  contain: none;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  height: 60px;
+  padding-top: 8px;
+  position: relative;
+  pointer-events: auto;
 }
-
 
 ion-tab-button {
   --color: #8e8e93;
   --color-selected: #6d28d9;
+  min-width: 80px;
   
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
 
   ion-label {
-    display: none; 
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 4px;
+    display: block;
     transition: all 0.3s ease;
   }
 
-
   &.tab-selected {
-    background: rgba(109, 40, 217, 0.1);
-    border-radius: 16px;
+    --color: #6d28d9;
+    
+    ion-icon {
+      color: #6d28d9;
+    }
     
     ion-label {
-      display: block;
-      margin-left: 8px;
+      color: #6d28d9;
+      font-weight: 600;
+    }
+  }
+  
+  &:not(.tab-selected) {
+    ion-icon {
+      color: #8e8e93;
+    }
+    
+    ion-label {
+      color: #8e8e93;
     }
   }
 }

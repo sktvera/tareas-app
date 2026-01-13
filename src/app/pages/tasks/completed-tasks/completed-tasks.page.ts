@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { 
+  IonHeader,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge,
+  IonButton,
+  IonIcon,
+  ModalController
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -23,7 +33,14 @@ import {
   styleUrls: ['./completed-tasks.page.scss','../../../shared/scss/tasks.shared.scss'],
   standalone: true,
   imports: [
-    IonicModule,
+    IonHeader,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonBadge,
+    IonButton,
+    IonIcon,
     CommonModule,
     FormsModule,
     AppHeaderComponent,

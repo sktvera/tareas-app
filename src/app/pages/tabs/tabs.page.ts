@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';import {
+import { 
+  IonTabs, 
+  IonTabBar, 
+  IonTabButton, 
+  IonIcon, 
+  IonLabel,
+  IonRouterOutlet 
+} from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
+import {
   addCircleOutline,
   listOutline,
   checkmarkDoneOutline
@@ -11,7 +19,15 @@ import { RouterModule } from '@angular/router';import {
   templateUrl: './tabs.page.html',
   styleUrls: ['./tabs.page.scss'],
   standalone: true,
-  imports: [IonicModule, RouterModule],
+  imports: [
+    IonTabs,
+    IonTabBar,
+    IonTabButton,
+    IonIcon,
+    IonLabel,
+    IonRouterOutlet,
+    RouterModule
+  ],
 })
 export class TabsPage {
   addIcon = addCircleOutline;

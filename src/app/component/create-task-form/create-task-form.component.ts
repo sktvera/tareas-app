@@ -1,6 +1,15 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { 
+  IonCard,
+  IonCardContent,
+  IonInput,
+  IonTextarea,
+  IonSelect,
+  IonSelectOption,
+  IonButton,
+  IonIcon
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 
 import { TaskCategory } from '../../models/task.model';
@@ -17,7 +26,18 @@ import {
   templateUrl: './create-task-form.component.html',
   styleUrls: ['./create-task-form.component.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule, CommonModule],
+  imports: [
+    IonCard,
+    IonCardContent,
+    IonInput,
+    IonTextarea,
+    IonSelect,
+    IonSelectOption,
+    IonButton,
+    IonIcon,
+    FormsModule,
+    CommonModule
+  ],
 })
 export class TaskFormComponent implements OnInit {
 
@@ -25,7 +45,7 @@ export class TaskFormComponent implements OnInit {
   addCircleIcon = addCircleOutline;
   lockClosedIcon = lockClosedOutline;
 
-  categories: TaskCategory[] = [];
+  @Input() categories: TaskCategory[] = [];
   title: string = '';
   description: string = '';
   category: TaskCategory | null = null;
@@ -43,7 +63,10 @@ export class TaskFormComponent implements OnInit {
   }
 
   private loadCategories(): void {
-    this.categories = this.categoryService.getCategories();
+    // Si no se pasan categorías como input, cargarlas del servicio
+    if (this.categories.length === 0) {
+      this.categories = this.categoryService.getCategories();
+    }
     if (this.categories.length > 0) {
       this.category = this.categories[0];
     }

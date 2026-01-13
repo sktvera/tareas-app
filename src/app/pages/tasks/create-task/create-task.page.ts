@@ -1,6 +1,16 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController, IonItemSliding } from '@ionic/angular';
+import { 
+  IonHeader,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonBadge,
+  IonButton,
+  IonIcon,
+  ModalController
+} from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../../../service/task.service';
@@ -25,20 +35,26 @@ import {
   styleUrls: ['./create-task.page.scss','../../../shared/scss/tasks.shared.scss'],
   standalone: true,
   imports: [
-    IonicModule,
+    IonHeader,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonBadge,
+    IonButton,
+    IonIcon,
     CommonModule,
     FormsModule,
     TaskFormComponent,
     AppHeaderComponent,
     TaskToolbarComponent
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CreateTaskPage implements OnInit {
 
-chevronForwardOutline = chevronForwardOutline;
-checkmarkCircleOutline = checkmarkCircleOutline;
-clipboardOutline = clipboardOutline;
+  chevronForwardIcon = chevronForwardOutline;
+  checkmarkCircleIcon = checkmarkCircleOutline;
+  clipboardIcon = clipboardOutline;
 
   tasks: Task[] = [];
   categories: TaskCategory[] = [];
@@ -82,9 +98,8 @@ clipboardOutline = clipboardOutline;
     );
   }
 
-  assignTask(id: number, sliding?: IonItemSliding): void {
+  assignTask(id: number): void {
     this.taskService.assignTask(id);
-    sliding?.close(); 
     this.loadTasks();
   }
 

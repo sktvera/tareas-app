@@ -1,17 +1,29 @@
 /* ==========================
    ICONOS INLINE EN TAREAS
 ========================== */
+.inline-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 .inline-actions ion-button {
-  --background: transparent;  
+  --background: transparent;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  margin: 0;
+  height: 36px;
+  width: 36px;
+  min-width: 36px;
 }
 
 .inline-actions ion-button ion-icon {
-  color: #ffffff; 
-  font-size: 18px; 
+  color: #6d28d9; 
+  font-size: 20px; 
 }
-
 
 .inline-actions ion-button[color="danger"] ion-icon {
-  color: #ffffff; 
+  color: #d4af37; 
 }
-

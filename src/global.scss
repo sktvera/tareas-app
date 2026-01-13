@@ -1,4 +1,3 @@
-
 body {
   background-color: #ffffff; 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -96,6 +95,31 @@ ion-searchbar {
   100% { transform: translateX(0); opacity: 0.3; }
 }
 
+/* Swipe Options - Estilos según documentación oficial de Ionic */
+ion-item-sliding {
+  contain: layout style;
+}
+
+ion-item-options {
+  display: flex;
+  align-items: center;
+}
+
+ion-item-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 20px;
+  
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+}
+
 
 .hidden { display: none !important; }
 
@@ -145,4 +169,45 @@ ion-searchbar {
 .toast-info {
   --background: #3498db;
   --color: #ffffff;
+}
+
+/* Tabs styling */
+ion-tab-bar {
+  --background: #ffffff;
+  --border: 1px solid rgba(0, 0, 0, 0.1);
+  height: 60px;
+  z-index: 5;
+  position: relative;
+}
+
+ion-tab-button {
+  --color: #8e8e93;
+  --color-selected: #6d28d9;
+  pointer-events: auto;
+}
+
+/* Ensure content has space for tabs */
+ion-content {
+  --padding-bottom: 80px;
+  --overflow: auto;
+  --scroll-y: auto;
+  z-index: 1;
+  position: relative;
+}
+
+/* Headers should always be on top */
+ion-header {
+  z-index: 100 !important;
+  position: relative;
+  pointer-events: none;
+}
+
+ion-header > * {
+  pointer-events: auto;
+}
+
+ion-toolbar {
+  z-index: 100 !important;
+  position: relative;
+  pointer-events: auto;
 }

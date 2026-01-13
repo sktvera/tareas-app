@@ -1,53 +1,52 @@
-<pp-app-header></pp-app-header>
-
-<app-task-toolbar
-  [activeFiltersCount]="activeCategoryFilters.length"
-  (searchChange)="onSearchChange($event)"
-  (filterClick)="openCategoryModal()"
-  (sortChange)="onSortChange($event)">
-</app-task-toolbar>
+<ion-header>
+  <pp-app-header></pp-app-header>
+  <app-task-toolbar
+    [activeFiltersCount]="activeCategoryFilters.length"
+    (searchChange)="onSearchChange($event)"
+    (filterClick)="openCategoryModal()"
+    (sortChange)="onSortChange($event)">
+  </app-task-toolbar>
+</ion-header>
 
 <ion-content class="ion-padding">
 
   <!-- ===== LISTA ===== -->
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding">
+    <ion-item *ngFor="let task of tasks" lines="none" class="task-item">
 
-      <!-- ===== SWIPE → VOLVER ===== -->
-      <ion-item-options side="start">
-        <ion-item-option
-          color="warning"
-          expandable
-          (click)="returnTask(task.id)">
-
-          <ion-icon [icon]="backIcon"></ion-icon>
-          Volver
-
-        </ion-item-option>
-      </ion-item-options>
-
-      <!-- ===== ITEM ===== -->
-      <ion-item lines="none" class="task-item">
-
-        <ion-label>
+      <div class="task-content">
+        
+        <!-- TEXTO -->
+        <ion-label class="task-label">
           <h2>{{ task.title }}</h2>
           <p>{{ task.description }}</p>
-
           <ion-badge color="success">
             {{ task.category }}
           </ion-badge>
         </ion-label>
 
-        <!-- Estado visual -->
-        <ion-icon
-          [icon]="completedIcon"
-          class="completed-icon">
-        </ion-icon>
+        <!-- ACCIONES -->
+        <div class="task-actions">
+          <ion-icon
+            [icon]="completedIcon"
+            class="completed-icon">
+          </ion-icon>
+          
+          <ion-button 
+            fill="solid" 
+            color="warning" 
+            size="small" 
+            class="action-button return-button"
+            (click)="returnTask(task.id)">
+            <ion-icon slot="start" [icon]="backIcon"></ion-icon>
+            Volver
+          </ion-button>
+        </div>
 
-      </ion-item>
+      </div>
 
-    </ion-item-sliding>
+    </ion-item>
 
   </ion-list>
 

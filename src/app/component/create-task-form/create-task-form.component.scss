@@ -9,11 +9,24 @@
 }
 
 .form-card {
-  margin: 16px;
+  margin: 0;
   border-radius: var(--border-radius-lg);
   background: #ffffff;
-  box-shadow: 0 12px 35px rgba(106, 17, 203, 0.08); /* Sombra con tinte morado */
+  box-shadow: 0 12px 35px rgba(106, 17, 203, 0.08);
   border: 1px solid rgba(106, 17, 203, 0.05);
+  overflow: visible;
+  min-height: auto;
+  width: 100%;
+  display: block;
+}
+
+.form-card ion-card-content {
+  padding: 20px;
+  overflow: visible;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .form-header h2 {
@@ -50,6 +63,8 @@
   flex-direction: column;
   gap: 18px;
   margin-top: 20px;
+  width: 100%;
+  overflow: visible;
 }
 
 .custom-input {
@@ -73,10 +88,18 @@
 
 /* Botón Morado Estilo Moderno */
 .create-button {
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  width: 100%;
+  --background: #6d28d9;
+  --color: #ffffff;
+  --border-radius: 14px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  height: auto;
+  min-height: 48px;
 }
 
 .custom-input {

@@ -1,8 +1,7 @@
 <ion-toolbar class="apple-header">
-
   <!-- ===== CREAR ===== -->
   <ion-buttons slot="start" *ngIf="showCreate">
-    <ion-button fill="clear" (click)="create.emit()">
+    <ion-button fill="solid" (click)="create.emit()">
       <ion-icon [icon]="addIcon"></ion-icon>
     </ion-button>
   </ion-buttons>
@@ -25,7 +24,7 @@
   <!-- ===== ACTIONS ===== -->
   <ion-buttons slot="end">
     <!-- FILTER -->
-    <ion-button fill="clear" (click)="filterClick.emit()">
+    <ion-button fill="solid" (click)="filterClick.emit()">
       <ion-icon [icon]="funnelIcon"></ion-icon>
       <ion-badge *ngIf="activeFiltersCount" class="filter-badge">
         {{ activeFiltersCount }}
@@ -33,7 +32,7 @@
     </ion-button>
 
     <!-- SORT -->
-    <ion-button fill="clear" (click)="toggleSort()">
+    <ion-button fill="solid" (click)="toggleSort()">
       <ion-icon [icon]="sortDirection === 'ASC' ? arrowUpIcon : arrowDownIcon"></ion-icon>
     </ion-button>
   </ion-buttons>

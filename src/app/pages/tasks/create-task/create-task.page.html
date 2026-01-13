@@ -1,32 +1,31 @@
 <!-- ===== HEADER ===== -->
-<pp-app-header></pp-app-header>
-
-<app-task-toolbar [showCreate]="true" [activeFiltersCount]="activeCategoryFilters.length" (create)="toggleCreateForm()"
-  (searchChange)="onSearchChange($event)" (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
-</app-task-toolbar>
+<ion-header>
+  <pp-app-header></pp-app-header>
+  <app-task-toolbar [showCreate]="true" [activeFiltersCount]="activeCategoryFilters.length" (create)="toggleCreateForm()"
+    (searchChange)="onSearchChange($event)" (filterClick)="openCategoryModal()" (sortChange)="onSortChange($event)">
+  </app-task-toolbar>
+</ion-header>
 
 <!-- ===== CONTENT ===== -->
 <ion-content class="ion-padding">
 
   <!-- FORM CREAR -->
-  <ion-card *ngIf="showCreateForm" class="create-form-card">
-
+  <div *ngIf="showCreateForm" class="create-form-wrapper">
     <app-task-form [categories]="categories" (create)="createTask($event); showCreateForm = false">
     </app-task-form>
+  </div>
 
-  </ion-card>
-
-  <ion-divider class="section-divider"></ion-divider>
+  <hr class="section-divider">
 
   <!-- LISTA -->
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding" (ionItemSlidingDidOpen)="task.swiped = true"
-      (ionItemSlidingDidClose)="task.swiped = false">
+    <ion-item *ngFor="let task of tasks" lines="none" class="task-item">
 
-      <ion-item lines="none" class="task-item">
-
-        <ion-label>
+      <div class="task-content">
+        
+        <!-- TEXTO -->
+        <ion-label class="task-label">
           <h2>{{ task.title }}</h2>
           <p>{{ task.description }}</p>
           <ion-badge color="medium">
@@ -34,26 +33,29 @@
           </ion-badge>
         </ion-label>
 
-        <ion-icon *ngIf="!task.swiped" [icon]="chevronForwardOutline" class="swipe-hint">
-        </ion-icon>
+        <!-- ACCIONES -->
+        <div class="task-actions">
+          <ion-button 
+            fill="solid" 
+            color="success" 
+            size="small" 
+            class="action-button assign-button"
+            (click)="assignTask(task.id)">
+            <ion-icon slot="start" [icon]="checkmarkCircleIcon"></ion-icon>
+            Asignar
+          </ion-button>
+        </div>
 
-      </ion-item>
+      </div>
 
-      <ion-item-options side="end">
-        <ion-item-option color="success" expandable (click)="assignTask(task.id)">
-          <ion-icon [icon]="checkmarkCircleOutline"></ion-icon>
-          Asignar
-        </ion-item-option>
-      </ion-item-options>
-
-    </ion-item-sliding>
+    </ion-item>
 
   </ion-list>
 
   <!-- EMPTY -->
   <ng-template #empty>
     <div class="empty-state">
-      <ion-icon [icon]="clipboardOutline" ></ion-icon>
+      <ion-icon [icon]="clipboardIcon" ></ion-icon>
       <p>No hay tareas pendientes</p>
     </div>
   </ng-template>

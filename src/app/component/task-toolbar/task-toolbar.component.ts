@@ -1,5 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { 
+  IonToolbar,
+  IonButtons,
+  IonButton,
+  IonIcon,
+  IonSearchbar,
+  IonSpinner,
+  IonBadge
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -14,7 +22,17 @@ export type SortDirection = 'ASC' | 'DESC';
 @Component({
   selector: 'app-task-toolbar',
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule],
+  imports: [
+    IonToolbar,
+    IonButtons,
+    IonButton,
+    IonIcon,
+    IonSearchbar,
+    IonSpinner,
+    IonBadge,
+    CommonModule,
+    FormsModule
+  ],
   templateUrl: './task-toolbar.component.html',
   styleUrls: ['./task-toolbar.component.scss'],
 })

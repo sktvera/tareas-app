@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
-/* ICONOS */
-import {
-  checkmarkCircleOutline,
-  alertCircleOutline,
-  informationCircleOutline
-} from 'ionicons/icons';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +12,7 @@ export class NotificationService {
    * Muestra una notificación tipo Toast con estilo personalizado.
    * @param message Texto a mostrar
    * @param type 'success' | 'error' | 'info'
-   * @param icon Icono opcional (ionicons/icons)
+   * @param icon Icono opcional (nombre del icono registrado en minúsculas con guiones)
    */
   async show(
     message: string,
@@ -28,9 +21,9 @@ export class NotificationService {
   ): Promise<void> {
 
     const defaultIcons = {
-      success: checkmarkCircleOutline,
-      error: alertCircleOutline,
-      info: informationCircleOutline,
+      success: 'checkmark-circle-outline',
+      error: 'alert-circle-outline',
+      info: 'information-circle-outline',
     };
 
     const toast = await this.toastCtrl.create({
