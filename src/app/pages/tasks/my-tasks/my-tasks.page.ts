@@ -12,6 +12,14 @@ import { AppHeaderComponent } from '../../../component/app-header/app-header.com
 import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
 import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
 
+import {
+  arrowBackCircleOutline,
+  createOutline,
+  trashOutline,
+  checkmarkCircleOutline,
+  clipboardOutline
+} from 'ionicons/icons';
+
 @Component({
   selector: 'app-my-tasks',
   templateUrl: './my-tasks.page.html',
@@ -32,6 +40,12 @@ export class MyTasksPage implements OnInit {
   searchText = '';
   sortDirection: 'ASC' | 'DESC' = 'ASC';
   activeCategoryFilters: TaskCategory[] = [];
+
+    arrowBackCircleIcon = arrowBackCircleOutline;
+  createIcon = createOutline;
+  trashIcon = trashOutline;
+  checkmarkCircleIcon = checkmarkCircleOutline;
+  clipboardIcon = clipboardOutline;
 
   constructor(
     private taskService: TaskService,

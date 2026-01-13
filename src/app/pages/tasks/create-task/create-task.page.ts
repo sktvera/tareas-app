@@ -13,6 +13,12 @@ import { CategoryFilterModalComponent } from '../../../component/category-filter
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
 import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
 
+import {
+  chevronForwardOutline,
+  checkmarkCircleOutline,
+  clipboardOutline
+} from 'ionicons/icons';
+
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.page.html',
@@ -29,6 +35,10 @@ import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolb
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CreateTaskPage implements OnInit {
+
+chevronForwardOutline = chevronForwardOutline;
+checkmarkCircleOutline = checkmarkCircleOutline;
+clipboardOutline = clipboardOutline;
 
   tasks: Task[] = [];
   categories: TaskCategory[] = [];

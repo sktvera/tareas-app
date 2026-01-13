@@ -11,7 +11,7 @@
 
 <ion-content class="ion-padding">
   <div class="input-group">
-    
+
     <ion-input
       label="Título de la tarea"
       labelPlacement="stacked"
@@ -20,7 +20,9 @@
       class="custom-input"
       placeholder="Escribe el nombre...">
     </ion-input>
-<br>
+
+    <br />
+
     <ion-textarea
       label="Descripción"
       labelPlacement="stacked"
@@ -30,28 +32,35 @@
       class="custom-input"
       placeholder="Detalles adicionales (opcional)">
     </ion-textarea>
-<br>
+
+    <br />
+
     <ion-select
       label="Categoría"
       labelPlacement="stacked"
       fill="outline"
       interface="popover"
-      toggleIcon="chevron-down-outline"
       [(ngModel)]="category"
       class="custom-input">
+
       <ion-select-option *ngFor="let cat of categories" [value]="cat">
         {{ cat }}
       </ion-select-option>
+
     </ion-select>
 
   </div>
-<br>
-  <ion-button 
-    expand="block" 
-    class="save-button" 
+
+  <br />
+
+  <ion-button
+    expand="block"
+    class="save-button"
     (click)="save()"
     mode="ios">
+
     Guardar cambios
-    <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+    <ion-icon slot="end" [icon]="checkIcon"></ion-icon>
+
   </ion-button>
 </ion-content>

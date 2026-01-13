@@ -34,14 +34,14 @@
           </ion-badge>
         </ion-label>
 
-        <ion-icon *ngIf="!task.swiped" name="chevron-forward-outline" class="swipe-hint">
+        <ion-icon *ngIf="!task.swiped" [icon]="chevronForwardOutline" class="swipe-hint">
         </ion-icon>
 
       </ion-item>
 
       <ion-item-options side="end">
         <ion-item-option color="success" expandable (click)="assignTask(task.id)">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <ion-icon [icon]="checkmarkCircleOutline"></ion-icon>
           Asignar
         </ion-item-option>
       </ion-item-options>
@@ -53,7 +53,7 @@
   <!-- EMPTY -->
   <ng-template #empty>
     <div class="empty-state">
-      <ion-icon name="clipboard-outline"></ion-icon>
+      <ion-icon [icon]="clipboardOutline" ></ion-icon>
       <p>No hay tareas pendientes</p>
     </div>
   </ng-template>

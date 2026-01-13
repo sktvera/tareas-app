@@ -12,9 +12,7 @@
   <!-- ===== LISTA ===== -->
   <ion-list *ngIf="tasks.length; else empty" class="task-list">
 
-    <ion-item-sliding
-      *ngFor="let task of tasks"
-      class="task-sliding">
+    <ion-item-sliding *ngFor="let task of tasks" class="task-sliding">
 
       <!-- ===== SWIPE → VOLVER ===== -->
       <ion-item-options side="start">
@@ -22,8 +20,10 @@
           color="warning"
           expandable
           (click)="returnTask(task.id)">
-          <ion-icon name="arrow-back-circle-outline"></ion-icon>
+
+          <ion-icon [icon]="backIcon"></ion-icon>
           Volver
+
         </ion-item-option>
       </ion-item-options>
 
@@ -41,7 +41,7 @@
 
         <!-- Estado visual -->
         <ion-icon
-          name="checkmark-circle-outline"
+          [icon]="completedIcon"
           class="completed-icon">
         </ion-icon>
 
@@ -54,7 +54,7 @@
   <!-- ===== EMPTY ===== -->
   <ng-template #empty>
     <div class="empty-state">
-      <ion-icon name="checkmark-done-outline"></ion-icon>
+      <ion-icon [icon]="doneIcon"></ion-icon>
       <p>No hay tareas completadas</p>
     </div>
   </ng-template>

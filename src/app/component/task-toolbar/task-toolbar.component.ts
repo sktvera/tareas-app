@@ -2,6 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {
+  addCircleOutline,
+  funnelOutline,
+  arrowUpOutline,
+  arrowDownOutline
+} from 'ionicons/icons';
 
 export type SortDirection = 'ASC' | 'DESC';
 
@@ -16,7 +22,10 @@ export class TaskToolbarComponent {
 
   @Input() showCreate = false;
   @Input() activeFiltersCount = 0;
-
+ addIcon = addCircleOutline;
+  funnelIcon = funnelOutline;
+  arrowUpIcon = arrowUpOutline;
+  arrowDownIcon = arrowDownOutline;
   searchText = '';
   sortDirection: SortDirection = 'ASC';
   loading = false;

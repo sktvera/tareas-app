@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';import {
+  addCircleOutline,
+  listOutline,
+  checkmarkDoneOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-tabs',
@@ -9,4 +13,9 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [IonicModule, RouterModule],
 })
-export class TabsPage {}
+export class TabsPage {
+  addIcon = addCircleOutline;
+  listIcon = listOutline;
+  doneIcon = checkmarkDoneOutline;
+
+}

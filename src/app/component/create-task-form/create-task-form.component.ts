@@ -6,6 +6,12 @@ import { CommonModule } from '@angular/common';
 import { TaskCategory } from '../../models/task.model';
 import { CategoryService } from '../../service/category.service';
 
+import {
+  sparklesOutline,
+  addCircleOutline,
+  lockClosedOutline
+} from 'ionicons/icons';
+
 @Component({
   selector: 'app-task-form',
   templateUrl: './create-task-form.component.html',
@@ -14,6 +20,11 @@ import { CategoryService } from '../../service/category.service';
   imports: [IonicModule, FormsModule, CommonModule],
 })
 export class TaskFormComponent implements OnInit {
+
+  sparklesIcon = sparklesOutline;
+  addCircleIcon = addCircleOutline;
+  lockClosedIcon = lockClosedOutline;
+
   categories: TaskCategory[] = [];
   title: string = '';
   description: string = '';

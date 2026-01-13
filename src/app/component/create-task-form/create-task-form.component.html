@@ -3,7 +3,8 @@
     <div class="form-header">
       <h2>Nueva Tarea</h2>
       <div class="form-guide">
-        <ion-icon name="sparkles-outline"></ion-icon>
+<ion-icon [icon]="sparklesIcon"></ion-icon>
+        
         <p>Organiza tu día indicando los detalles y la categoría de tu actividad.</p>
       </div>
     </div>
@@ -42,14 +43,15 @@
       </ion-select>
     </div>
 
-<ion-button
-  expand="block"
-  class="create-button"
-  [disabled]="!isFormValid" 
-  (click)="submit()"
-  mode="ios">
+<ion-button [disabled]="!isFormValid" 
+  (click)="submit()" class="create-button">
   Crear tarea
-  <ion-icon slot="end" [name]="isFormValid ? 'add-circle' : 'lock-closed-outline'"></ion-icon>
+  <ion-icon
+    slot="end"
+    [icon]="isFormValid ? addCircleIcon : lockClosedIcon">
+  </ion-icon>
 </ion-button>
   </ion-card-content>
 </ion-card>
+
+

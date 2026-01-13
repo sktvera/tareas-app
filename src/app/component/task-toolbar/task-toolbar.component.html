@@ -3,7 +3,7 @@
   <!-- ===== CREAR ===== -->
   <ion-buttons slot="start" *ngIf="showCreate">
     <ion-button fill="clear" (click)="create.emit()">
-      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-icon [icon]="addIcon"></ion-icon>
     </ion-button>
   </ion-buttons>
 
@@ -26,7 +26,7 @@
   <ion-buttons slot="end">
     <!-- FILTER -->
     <ion-button fill="clear" (click)="filterClick.emit()">
-      <ion-icon name="funnel-outline"></ion-icon>
+      <ion-icon [icon]="funnelIcon"></ion-icon>
       <ion-badge *ngIf="activeFiltersCount" class="filter-badge">
         {{ activeFiltersCount }}
       </ion-badge>
@@ -34,7 +34,7 @@
 
     <!-- SORT -->
     <ion-button fill="clear" (click)="toggleSort()">
-      <ion-icon [name]="sortDirection === 'ASC' ? 'arrow-up-outline' : 'arrow-down-outline'"></ion-icon>
+      <ion-icon [icon]="sortDirection === 'ASC' ? arrowUpIcon : arrowDownIcon"></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-toolbar>

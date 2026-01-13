@@ -1,61 +1,43 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import {
-  RouteReuseStrategy,
-  provideRouter,
-  withPreloading,
-  PreloadAllModules
-} from '@angular/router';
-import {
-  IonicRouteStrategy,
-  provideIonicAngular
-} from '@ionic/angular/standalone';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import { RouteReuseStrategy } from '@angular/router';
 
 import { addIcons } from 'ionicons';
-// ICONOS FUNCIONALES
-import { 
-  addCircleOutline,
-  addOutline,
-  closeOutline,
-  searchOutline,
-  funnelOutline,
-  arrowUpOutline,
-  arrowDownOutline,
-  listOutline,
-  checkmarkCircleOutline,
-  checkmarkDoneOutline,
+import {
+  sparklesOutline,
+  saveOutline,
+  personOutline,
+  peopleOutline,
+  checkmarkDoneCircleOutline,
+  arrowBackCircleOutline,
   trashOutline,
-  chevronForwardOutline,
-  chevronDownOutline,
-  createOutline
+  alertCircleOutline,
+  informationCircleOutline,
+  checkmarkCircleOutline
 } from 'ionicons/icons';
 
-import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
 
-// ICONOS FUNCIONALES
-addIcons({'create-outline': createOutline,
-  'add-circle-outline': addCircleOutline,
-  'add-outline': addOutline,
-  'close-outline': closeOutline,   
-  'search-outline': searchOutline, 
-  'funnel-outline': funnelOutline,
-  'arrow-up-outline': arrowUpOutline,
-  'arrow-down-outline': arrowDownOutline,
-  'list-outline': listOutline,
-  'checkmark-circle-outline': checkmarkCircleOutline,
-  'checkmark-done-outline': checkmarkDoneOutline,
+/* ✅ REGISTRO GLOBAL */
+addIcons({
+  'sparkles-outline': sparklesOutline,
+  'save-outline': saveOutline,
+  'person-outline': personOutline,
+  'people-outline': peopleOutline,
+  'checkmark-done-circle-outline': checkmarkDoneCircleOutline,
+  'arrow-back-circle-outline': arrowBackCircleOutline,
   'trash-outline': trashOutline,
-  'chevron-forward-outline': chevronForwardOutline,
-  'chevron-down-outline': chevronDownOutline,
-  
+  'alert-circle-outline': alertCircleOutline,
+  'information-circle-outline': informationCircleOutline,
+  'checkmark-circle-outline': checkmarkCircleOutline,
 });
 
 bootstrapApplication(AppComponent, {
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideAnimations()
+    provideRouter(routes),
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
 });

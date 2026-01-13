@@ -73,33 +73,10 @@
 
 /* Botón Morado Estilo Moderno */
 .create-button {
-  margin-top: 32px;
-  height: 56px;
-  --border-radius: var(--border-radius-md);
-  --box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
-  font-weight: 700;
-  font-size: 1rem;
-  
-  &::part(native) {
-    background: var(--purple-gradient);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  &:hover {
-    --box-shadow: 0 12px 25px rgba(106, 17, 203, 0.4);
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: scale(0.97);
-  }
-
-  &[disabled] {
-    opacity: 0.5;
-    --box-shadow: none;
-    filter: grayscale(0.5);
-    cursor: not-allowed;
-  }
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
 }
 
 .custom-input {

@@ -11,7 +11,11 @@ import { CategoryService } from '../../../service/category.service';
 import { AppHeaderComponent } from '../../../component/app-header/app-header.component';
 import { TaskToolbarComponent } from '../../../component/task-toolbar/task-toolbar.component';
 import { CategoryFilterModalComponent } from '../../../component/category-filter-modal/category-filter-modal.component';
-
+import {
+  arrowBackCircleOutline,
+  checkmarkCircleOutline,
+  checkmarkDoneOutline
+} from 'ionicons/icons';
 
 @Component({
   selector: 'app-completed-tasks',
@@ -28,6 +32,9 @@ import { CategoryFilterModalComponent } from '../../../component/category-filter
 })
 export class CompletedTasksPage implements OnInit {
 
+    backIcon = arrowBackCircleOutline;
+  completedIcon = checkmarkCircleOutline;
+  doneIcon = checkmarkDoneOutline;
   tasks: Task[] = [];
   categories: TaskCategory[] = [];
   activeCategoryFilters: TaskCategory[] = [];

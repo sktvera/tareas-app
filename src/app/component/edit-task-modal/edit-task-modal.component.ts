@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task, TaskCategory } from '../../models/task.model';
 import { TaskService } from '../../service/task.service';
+import { checkmarkCircleOutline } from 'ionicons/icons';
 
 @Component({
   standalone: true,
@@ -11,7 +12,7 @@ import { TaskService } from '../../service/task.service';
   templateUrl: './edit-task-modal.component.html',
 })
 export class EditTaskModalComponent {
-
+  checkIcon = checkmarkCircleOutline;
   @Input() task!: Task;
 
   title = '';
